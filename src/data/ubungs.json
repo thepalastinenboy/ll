@@ -1,0 +1,39 @@
+{
+    "practices": [{
+            "id": 1,
+            "slug": "p",
+            "name": "Practice 1",
+            "questions": [{
+                    "id": 1,
+                    "sentence": "Wir wurden ___ gezwungen, mit niemandem über die Angelegenheit zu sprechen.",
+                    "blankIndex": 2,
+                    "answer": "dazu"
+                },
+                {
+                    "id": 2,
+                    "sentence": "Er hat mir ___ geholfen, als ich in Schwierigkeiten war.",
+                    "blankIndex": 3,
+                    "answer": "sehr"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "slug": "practice-2",
+            "name": "Practice 2",
+            "questions": [{
+                    "id": 3,
+                    "sentence": "Ich habe gestern ___ Blumen im Park gesehen.",
+                    "blankIndex": 2,
+                    "answer": "schöne"
+                },
+                {
+                    "id": 4,
+                    "sentence": "Der Junge, ___ den ich gestern getroffen habe, heißt Peter.",
+                    "blankIndex": 4,
+                    "answer": "den"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,75 @@
+.wortschatz-v {
+    margin: 0 auto;
+    max-width: 100%;
+    padding-top: 30px;
+}
+
+.wortschatz-v-item {
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.wortschatz-v-item p {
+    white-space: pre-wrap;
+    line-height: 1.7;
+}
+
+.button-container-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.wortschatz-v button {
+    margin: 0 25px;
+    padding: 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: white;
+}
+
+.wortschatz-v .button-container-nav button {
+    margin: 0 25px;
+    padding: 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: black;
+    height: 6em;
+    width: 6em;
+}
+
+.wortschatz-v button:hover {
+    color: #0069d9;
+}
+
+.wortschatz-v .reset-button {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    bottom: 80px;
+    color: red;
+}
+
+.reset-button {
+    background-color: transparent;
+    color: red;
+    border: none;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    bottom: 10px;
+    left: 10px;
+}
+
+.slide-number {
+    text-align: center;
+    margin: 0;
+    font-size: 34px;
+}
