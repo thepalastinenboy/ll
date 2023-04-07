@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import articleData from "../data/KnowledgeBase.json";
 import { BasicLayout } from "../layouts/basicLayout";
 import { BackButton } from "../components/header/backbutton";
@@ -12,6 +12,12 @@ const Search = () => {
       article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       article.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const searchInputRef = useRef();
+
+  useEffect(() => {
+    searchInputRef.current.focus();
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -32,8 +38,8 @@ const Search = () => {
           <div className="title title-navbar-transparent">Suche</div>
         </div>
       </div>
-      <div className="newsman-block">
-        <div className="newsman-search">
+      <div className="b2-block">
+        <div className="b2-search">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={24}
@@ -55,11 +61,12 @@ const Search = () => {
             className="input"
             value={searchTerm}
             onChange={handleSearchChange}
+            ref={searchInputRef}
           />
         </div>
       </div>
-      <div className="newsman-block no-border">
-        <div className="newsman-block-content">
+      <div className="b2-block no-border">
+        <div className="b2-block-content">
           <div className="blog-list-wrapper">
             {filteredArticles.slice(0, visibleArticles).map((article) => (
               <div
@@ -75,7 +82,7 @@ const Search = () => {
             ))}
           </div>
           {visibleArticles < filteredArticles.length && (
-            <div className="newsman-badge text-align-center">
+            <div className="b2-badge text-align-center">
               <div className="badge text-color-red text-color-white" onClick={handleLoadMore}>
                 Load More
               </div>

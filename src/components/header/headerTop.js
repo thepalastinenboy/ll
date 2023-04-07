@@ -6,6 +6,7 @@ import { CenterdMenu } from "../menus/CenterdMenu";
 import { ThemeSwitcher1 } from "./themeSwitcher1";
 import { MenuButton } from "./menuButton";
 import { TopMenu } from "./topMenu";
+import ThemeSwitcher from "../elements/ThemeSwitcher";
 
 export const HeaderTop = (props) => {
   const [isActive, setActive] = useState(true);
@@ -42,6 +43,7 @@ export const HeaderTop = (props) => {
             <Logo />
           </div>
           <div className="right">
+          <ThemeSwitcher />
             <Link className="link icon-only" to="/search">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +61,7 @@ export const HeaderTop = (props) => {
                 <line x1={21} y1={21} x2="16.65" y2="16.65" />
               </svg>
             </Link>
+            
           </div>
         </div>
       </div>

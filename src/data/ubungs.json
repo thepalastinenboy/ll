@@ -3,17 +3,30 @@
             "id": 1,
             "slug": "p",
             "name": "Practice 1",
+            "category": "grammatik",
             "questions": [{
                     "id": 1,
                     "sentence": "Wir wurden ___ gezwungen, mit niemandem über die Angelegenheit zu sprechen.",
                     "blankIndex": 2,
-                    "answer": "dazu"
+                    "answer": "dazu",
+                    "answerOptions": [
+                        { "answerText": "dazu", "isCorrect": true },
+                        { "answerText": "damit", "isCorrect": false },
+                        { "answerText": "darüber", "isCorrect": false },
+                        { "answerText": "dagegen", "isCorrect": false }
+                    ]
                 },
                 {
                     "id": 2,
                     "sentence": "Er hat mir ___ geholfen, als ich in Schwierigkeiten war.",
                     "blankIndex": 3,
-                    "answer": "sehr"
+                    "answer": "sehr",
+                    "answerOptions": [
+                        { "answerText": "vielleicht", "isCorrect": false },
+                        { "answerText": "nie", "isCorrect": false },
+                        { "answerText": "immer", "isCorrect": false },
+                        { "answerText": "sehr", "isCorrect": true }
+                    ]
                 }
             ]
         },
@@ -21,17 +34,231 @@
             "id": 2,
             "slug": "practice-2",
             "name": "Practice 2",
+            "category": "grammatik",
             "questions": [{
                     "id": 3,
                     "sentence": "Ich habe gestern ___ Blumen im Park gesehen.",
                     "blankIndex": 2,
-                    "answer": "schöne"
+                    "answer": "schöne",
+                    "answerOptions": [
+                        { "answerText": "gelbe", "isCorrect": false },
+                        { "answerText": "rote", "isCorrect": false },
+                        { "answerText": "weiße", "isCorrect": false },
+                        { "answerText": "schöne", "isCorrect": true }
+                    ]
                 },
                 {
                     "id": 4,
                     "sentence": "Der Junge, ___ den ich gestern getroffen habe, heißt Peter.",
                     "blankIndex": 4,
-                    "answer": "den"
+                    "answer": "den",
+                    "answerOptions": [
+                        { "answerText": "der", "isCorrect": false },
+                        { "answerText": "das", "isCorrect": false },
+                        { "answerText": "die", "isCorrect": false },
+                        { "answerText": "den", "isCorrect": true }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "slug": "partizip-i",
+            "name": "Partizip I Übung",
+            "category": "grammatik",
+            "questions": [{
+                    "id": 1,
+                    "sentence": "Die ___ Blätter der Bäume raschelten im Wind.",
+                    "blankIndex": 1,
+                    "answer": "fallenden",
+                    "answerOptions": [
+                        { "answerText": "fallenden", "isCorrect": true },
+                        { "answerText": "gefallenen", "isCorrect": false },
+                        { "answerText": "gefallend", "isCorrect": false },
+                        { "answerText": "fallend", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "sentence": "Die ___ Kinder spielten fröhlich im Park.",
+                    "blankIndex": 1,
+                    "answer": "lachenden",
+                    "answerOptions": [
+                        { "answerText": "lachenden", "isCorrect": true },
+                        { "answerText": "gelachten", "isCorrect": false },
+                        { "answerText": "gelachend", "isCorrect": false },
+                        { "answerText": "gelacht", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "sentence": "Ich traf meine ___ Freunde auf der Straße.",
+                    "blankIndex": 1,
+                    "answer": "spazierenden",
+                    "answerOptions": [
+                        { "answerText": "spazierenden", "isCorrect": true },
+                        { "answerText": "spazierten", "isCorrect": false },
+                        { "answerText": "spaziert", "isCorrect": false },
+                        { "answerText": "spazierend", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "sentence": "Die ___ Sonne ging langsam unter.",
+                    "blankIndex": 1,
+                    "answer": "untergehende",
+                    "answerOptions": [
+                        { "answerText": "untergehende", "isCorrect": true },
+                        { "answerText": "untergegangene", "isCorrect": false },
+                        { "answerText": "untergehen", "isCorrect": false },
+                        { "answerText": "untergangen", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "sentence": "Die ___ Wolken kündigten einen Sturm an.",
+                    "blankIndex": 1,
+                    "answer": "dunklen",
+                    "answerOptions": [
+                        { "answerText": "dunklen", "isCorrect": true },
+                        { "answerText": "gedunkelten", "isCorrect": false },
+                        { "answerText": "gedunkelt", "isCorrect": false },
+                        { "answerText": "dunkelnd", "isCorrect": false }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "slug": "verben-mit-präpositionen",
+            "name": "Verben mit Präpositionen Übung",
+            "category": "grammatik",
+            "questions": [{
+                    "id": 1,
+                    "sentence": "Ich freue mich ___ deinen Besuch.",
+                    "blankIndex": 1,
+                    "answer": "auf",
+                    "answerOptions": [
+                        { "answerText": "auf", "isCorrect": true },
+                        { "answerText": "über", "isCorrect": false },
+                        { "answerText": "an", "isCorrect": false },
+                        { "answerText": "mit", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "sentence": "Ich denke oft ___ meine Kindheit.",
+                    "blankIndex": 1,
+                    "answer": "an",
+                    "answerOptions": [
+                        { "answerText": "an", "isCorrect": true },
+                        { "answerText": "über", "isCorrect": false },
+                        { "answerText": "auf", "isCorrect": false },
+                        { "answerText": "mit", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "sentence": "Ich interessiere mich ___ Geschichte.",
+                    "blankIndex": 1,
+                    "answer": "für",
+                    "answerOptions": [
+                        { "answerText": "für", "isCorrect": true },
+                        { "answerText": "an", "isCorrect": false },
+                        { "answerText": "über", "isCorrect": false },
+                        { "answerText": "mit", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "sentence": "Wir diskutieren oft ___ Politik.",
+                    "blankIndex": 1,
+                    "answer": "über",
+                    "answerOptions": [
+                        { "answerText": "über", "isCorrect": true },
+                        { "answerText": "an", "isCorrect": false },
+                        { "answerText": "auf", "isCorrect": false },
+                        { "answerText": "mit", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "sentence": "Ich kümmere mich ___ meine kranke Mutter.",
+                    "blankIndex": 1,
+                    "answer": "um",
+                    "answerOptions": [
+                        { "answerText": "um", "isCorrect": true },
+                        { "answerText": "an", "isCorrect": false },
+                        { "answerText": "über", "isCorrect": false },
+                        { "answerText": "mit", "isCorrect": false }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "slug": "zweiteilige-konnektoren",
+            "name": "Zweiteilige Konnektoren Übung",
+            "category": "grammatik",
+            "questions": [{
+                    "id": 1,
+                    "sentence": "Ich habe keine Zeit, ___ ich werde trotzdem versuchen, vorbeizukommen.",
+                    "blankIndex": 1,
+                    "answer": "aber",
+                    "answerOptions": [
+                        { "answerText": "aber", "isCorrect": true },
+                        { "answerText": "denn", "isCorrect": false },
+                        { "answerText": "und", "isCorrect": false },
+                        { "answerText": "oder", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "sentence": "Ich möchte gerne kommen, ___ ich bin leider schon anderweitig verplant.",
+                    "blankIndex": 1,
+                    "answer": "aber",
+                    "answerOptions": [
+                        { "answerText": "aber", "isCorrect": true },
+                        { "answerText": "denn", "isCorrect": false },
+                        { "answerText": "und", "isCorrect": false },
+                        { "answerText": "oder", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "sentence": "Er hat viel Erfahrung, ___ er ist trotzdem bereit, Neues zu lernen.",
+                    "blankIndex": 1,
+                    "answer": "aber",
+                    "answerOptions": [
+                        { "answerText": "aber", "isCorrect": true },
+                        { "answerText": "denn", "isCorrect": false },
+                        { "answerText": "und", "isCorrect": false },
+                        { "answerText": "oder", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "sentence": "Sie hat kein Geld, ___ sie möchte trotzdem reisen.",
+                    "blankIndex": 1,
+                    "answer": "aber",
+                    "answerOptions": [
+                        { "answerText": "aber", "isCorrect": true },
+                        { "answerText": "denn", "isCorrect": false },
+                        { "answerText": "und", "isCorrect": false },
+                        { "answerText": "oder", "isCorrect": false }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "sentence": "Es ist schon spät, ___ wir sollten trotzdem noch einen Spaziergang machen.",
+                    "blankIndex": 1,
+                    "answer": "aber",
+                    "answerOptions": [
+                        { "answerText": "aber", "isCorrect": true },
+                        { "answerText": "denn", "isCorrect": false },
+                        { "answerText": "und", "isCorrect": false },
+                        { "answerText": "oder", "isCorrect": false }
+                    ]
                 }
             ]
         }

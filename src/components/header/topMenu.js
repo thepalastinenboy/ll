@@ -15,11 +15,11 @@ export const TopMenu = () => {
         <GoHome size="1.5em" />
           
         </Link>
-        <Link className="link" to="/wortschatz">
+        <Link className="link" to="/wortschatz-liste">
        <TbLetterW size="1.5em" />
         </Link>
         <Link className="link" to="/navigation">
-        <CgMenuRight size="1.5em" /> übersicht
+        <CgMenuRight size="1.5em" />
           
         </Link>
       </div>

@@ -1,0 +1,61 @@
+.practice-completed-message {
+    margin-bottom: 20px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.practice-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.practice-question-section {
+    margin-bottom: 20px;
+}
+
+.practice-question-text {
+    margin-top: 20px;
+}
+
+.practice-answer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.practice-answer-section button {
+    border: 1px solid #dce2e5;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 0;
+    padding: 11px 30px;
+    word-break: break-word;
+    background: transparent;
+    text-align: left;
+    background: #f7f9fa;
+    color: inherit;
+    font-size: inherit;
+}
+
+.correct {
+    background-color: #28a745;
+}
+
+.incorrect {
+    background-color: #dc3545;
+}
+
+.practice-progress-section {
+    margin-bottom: 20px;
+    background: #0000000a;
+    border-radius: 5px;
+}
+
+.progress-bar {
+    height: 10px;
+    transition: width 0.5s ease;
+    position: relative;
+    background: rgb(51, 40, 249);
+    background: radial-gradient(circle, rgba(51, 40, 249, 1) 0%, rgba(133, 252, 70, 1) 100%);
+}

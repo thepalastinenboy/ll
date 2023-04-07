@@ -1,30 +1,79 @@
-import React from "react";
-import { ContactFrom } from "../components";
-import { ContactInfo } from "../components/widgets/contactInfo";
+import React, { useState } from 'react';
 import { BasicLayout } from "../layouts/basicLayout";
+import { HeaderTop } from "../components";
 
-const Contactme = () => {
+const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form data submitted:', formData);
+    // Send formData to your server or API here
+  };
+
   return (
-    <BasicLayout paddingTop footer>
-      <div className="container mb-5 pb-5">
-        <div className="col-lg-8 mx-auto">
-            <h1 className="display-2 mb-5"> Get in Touch</h1>
-          <div className="row">
-            <div className="col-lg-6 pe-5 mb-4">
-            <p className="text-secondary fw-normal text-uppercase">Location</p>
-            <h5 className="mb-3 h2 fw-light">Gerber-Ring 8, Rheinberg 64602, Germany</h5>
+    <BasicLayout>
+
+<HeaderTop />
+      <div className="b2-block">
+        <div className="b2-block-title display-flex align-items-center justify-content-space-between">
+          <div>
+            <div className="block-title-medium no-margin block-title text-semibold">
+              Kontakt
             </div>
-            <div className="col-lg-6 pe-5 mb-4">
-            <p className="text-secondary fw-normal text-uppercase">Phone</p>
-            <h5 className="mb-3 h2 fw-light">(05707) 15548</h5>
+            <div className="b2-opacity block-title no-margin b2-block-subtitle">
+              Hast du fragen?
             </div>
           </div>
-          <p className="text-secondary fw-normal text-uppercase">Got a question?</p>
-          <h5 class="mb-3 fw-light h2">contact@ubai.me</h5>
         </div>
+        <div className="b2-block-content">
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="message">Message:</label>
+          <textarea
+            name="message"
+            id="message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          ></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
       </div>
+    </div>
     </BasicLayout>
   );
 };
 
-export default Contactme;
+export default ContactPage;

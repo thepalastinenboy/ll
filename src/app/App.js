@@ -5,12 +5,16 @@ import Home from "../pages/home";
 import Search from "../pages/search";
 import Wortschatz from "../pages/wortschatz";
 import Navigation from "../pages/navigation";
+import UbungsList from "../pages/UbungsList";
+import SavedContent from "../pages/saved";
+import WortschatzList from "../pages/wortschatzlist";
 import GermanLanguagePractice from "../components/elements/ubung";
 import { useLocation } from "react-router-dom";
+import ContactPage from "../pages/contactme";
 import "./app.css";
 import AddArticle from "../pages/addarticle";
-
 import { BrowserRouter, Routes, Route, Switch } from "react-router-dom";
+import InstallPWAButton from './InstallPWAButton';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -22,26 +26,111 @@ const ScrollToTop = () => {
   return null;
 };
 
+const dataFiles = [
+  { filename: "verben.json", data: null },
+  { filename: "Verben mit Präpositionen.json", data: null },
+  { filename: "Thema Medzin.json", data: null },
+  { filename: "Beschwerde-Redemitteln.json", data: null },
+  // Add more data files here
+];
+
+const replaceUmlauts = (str) => {
+  return str
+    .replace(/ä/g, "ae")
+    .replace(/ö/g, "oe")
+    .replace(/ü/g, "ue")
+    .replace(/Ä/g, "Ae")
+    .replace(/Ö/g, "Oe")
+    .replace(/Ü/g, "Ue")
+    .replace(/ß/g, "ss");
+};
+
+const loadDataFiles = async () => {
+  const dataFilePromises = dataFiles.map((file) =>
+    import(`../components/wortschatz/${file.filename}`)
+  );
+  const data = await Promise.all(dataFilePromises);
+  return data.map((d, i) => ({
+    ...dataFiles[i],
+    data: d.default,
+    path: replaceUmlauts(
+      dataFiles[i].filename.replace(".json", "").replace(/ /g, "-")
+    ),
+    storageKey: dataFiles[i].filename.replace(".json", ""),
+    originalFilename: dataFiles[i].filename.replace(".json", ""),
+  }));
+};
+
 const App = () => {
+  const [isLoadingData, setIsLoadingData] = useState(true);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    loadDataFiles().then((data) => {
+      setData(data);
+      setIsLoadingData(false);
+    });
+  }, []);
+
+  // Render a loading indicator while the data is being loaded
+  if (isLoadingData) {
+    return (
+      <div
+        className="loader-container"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <div className="loader"></div>
+      </div>
+    );
+  }
+
   return (
     <>
       <BrowserRouter>
         <ScrollToTop />
-
+        <InstallPWAButton />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/wortschatz" element={<Wortschatz />} />
+
+          <Route
+            exact
+            path="/wortschatz-liste"
+            element={<WortschatzList dataFiles={dataFiles} />}
+          />
+
+          {data.map((data, index) => (
+            <Route
+              key={index}
+              path={`/wortschatz/${data.path}`}
+              element={
+                <Wortschatz
+                  data={data.data}
+                  storageKey={data.storageKey}
+                  originalFilename={data.originalFilename}
+                />
+              }
+            />
+          ))}
           <Route exact path="/navigation" element={<Navigation />} />
+          <Route exact path="/saved" element={<SavedContent />} />
           <Route path="/category/:category" element={<KnowledgeBase />} />
           <Route exact path="/article/:id" element={<Article />} />
           <Route path="/ubung/:slug" element={<GermanLanguagePractice />} />
+          <Route path="/uebungen" element={<UbungsList />} />
           <Route path="/search" element={<Search />} />
-          <Route exact path="add" element={<AddArticle />} />
-          <Route path="*" element={<Home />} />    
+          <Route exact path="/Kontakt" element={<ContactPage />} />
+          <Route exact path="/add" element={<AddArticle />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </>
   );
 };
+
 
 export default App;

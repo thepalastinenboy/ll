@@ -29,7 +29,7 @@ const KnowledgeBase = () => {
           <div className="title title-navbar-transparent">{category}</div>
         </div>
       </div>
-      {/* <div className="newsman-search">
+      {/* <div className="b2-search">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -53,14 +53,14 @@ const KnowledgeBase = () => {
           onChange={handleSearchChange}
         />
       </div> */}
-      <div className="newsman-block no-border">
-        <div className="newsman-opacity block-title no-margin newsman-block-subtitle">
+      <div className="b2-block no-border">
+        <div className="b2-opacity block-title no-margin b2-block-subtitle">
           Read trending news
         </div>
       </div>
 
-      <div className="newsman-block no-border">
-        <div className="newsman-block-content">
+      <div className="b2-block no-border">
+        <div className="b2-block-content">
           <div className="blog-list-wrapper">
             {filteredArticles.map((article) => (
               <div
