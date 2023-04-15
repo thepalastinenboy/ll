@@ -4,6 +4,7 @@ import { BasicLayout } from "../layouts/basicLayout";
 import { BackButton } from "../components/header/backbutton";
 import articles from "../data/KnowledgeBase.json";
 import ubungs from "../data/ubungs.json";
+import { Helmet } from "react-helmet";
 // import "./saved.css";
 
 const SavedContent = () => {
@@ -50,6 +51,10 @@ const SavedContent = () => {
 
   return (
     <BasicLayout>
+      <Helmet>
+        <title>{`Gespeicherte Liste - B2 Lernen`}</title>
+        <meta name="keywords" content="deutsch b2 lernen" />
+      </Helmet>
       <div className="navbar navbar-transparent">
         <div className="navbar-bg" />
         <div className="navbar-inner">
@@ -64,7 +69,7 @@ const SavedContent = () => {
           <div className="b2-block no-border">
             <div className="b2-block-title display-flex align-items-center justify-content-space-between">
               <div className="block-title-medium no-margin block-title text-semibold">
-                Gespeichert Themen
+              Gespeicherte Themen
               </div>
             </div>
           </div>
@@ -77,7 +82,7 @@ const SavedContent = () => {
                     getArticle(id) && (
                       <div
                         key={id}
-                        className="display-flex align-items-center justify-content-space-between"
+                        className="no-border display-flex align-items-center justify-content-space-between"
                       >
                         <div className="list-item-seved display-flex align-items-center">
                           <div className="post-author display-flex align-items-center">
@@ -113,48 +118,58 @@ const SavedContent = () => {
           <div className="b2-block no-border">
             <div className="b2-block-title display-flex align-items-center justify-content-space-between">
               <div className="block-title-medium no-margin block-title text-semibold">
-                Saved Practices
+                Gespeichrte Übungen
               </div>
             </div>
           </div>
+
           <div className="b2-block">
-            <div className="b2-opacity block-title no-margin b2-block-subtitle">
-              Start saved practices
-            </div>
-            <ul className="saved-list">
-              {savedPractices.map((slug) => (
-                <li
-                  key={slug}
-                  className="display-flex align-items-center justify-content-space-between"
-                >
-                  <div className="list-item-seved display-flex align-items-center">
-                    <h4>{getPractice(slug)?.name}</h4>
-                    <div className="b2-badge">
+            <div className="b2-block-content">
+              <div className="list-saved">
+                {savedPractices.map(
+                  (slug) =>
+                    getPractice(slug) && (
                       <div
-                        onClick={() => handleRemoveSavedPracticeClick(slug)}
-                        className="badge color-yellow text-color-black p-10"
+                        key={slug}
+                        className="no-border display-flex align-items-center justify-content-space-between"
                       >
-                        Löschen
+                        <div className="list-item-seved display-flex align-items-center">
+                          <div className="post-author display-flex align-items-center">
+                            <div className="post-author-infos margin-left-half">
+                              <span className="post-author-name display-block text-semibold">
+                                <Link to={`/ubung/${slug}`}>
+                                  {getPractice(slug).name}
+                                </Link>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="b2-badge">
+                            <div
+                              onClick={() =>
+                                handleRemoveSavedPracticeClick(slug)
+                              }
+                              className="badge color-yellow text-color-black p-10"
+                            >
+                              Löschen
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link
-                      className="badge color-yellow text-color-black p-10"
-                      to={`/ubung/${slug}`}
-                    >
-                      Start
-                    </Link>
-                  </p>
-                </li>
-              ))}
-            </ul>
+                    )
+                )}
+              </div>
+            </div>
           </div>
         </>
       )}
 
       {savedArticles.length === 0 && savedPractices.length === 0 && (
-        <p>You have not saved any content yet.</p>
+        <div className="b2-block">
+          <div className="b2-block-content">
+            <p>Du hast noch keinen Inhalt gespeichert.</p>
+          </div>
+        </div>
       )}
     </BasicLayout>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { HeaderTop } from "../components";
 import { BasicLayout } from "../layouts/basicLayout";
+import { Helmet } from "react-helmet";
 
 import Masonry from "react-masonry-css";
 
@@ -29,15 +30,19 @@ const WortschatzList = ({ dataFiles }) => {
 
   return (
     <BasicLayout>
+      <Helmet>
+                <title>{`Wortschatz Liste - B2 Lernen`}</title>
+                <meta name="keywords" content={`Wortschatz,deutsch ,b2 lernen`} />
+              </Helmet>
       <HeaderTop />
       <div className="b2-block">
         <div className="b2-block-title display-flex align-items-center justify-content-space-between">
           <div>
             <div className="block-title-medium no-margin block-title text-semibold">
-              Wortschatz und Vokabeln
+              Wortschatz
             </div>
             <div className="b2-opacity block-title no-margin b2-block-subtitle">
-              Alles was du im B2 merken musst.
+              Alles, was du im B2 merken musst.
             </div>
           </div>
         </div>

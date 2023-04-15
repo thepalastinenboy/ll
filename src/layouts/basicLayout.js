@@ -1,11 +1,10 @@
-import React ,{ useState }from "react";
+import React, { useState } from "react";
 import PullToRefresh from "./pulltoRefresh";
-
-import { HeaderTop, Footer ,TopMenu } from "../components";
+import { HeaderTop, Footer, BottomToolbar } from "../components";
 import styled from "styled-components";
 
 const Layout = styled.div`
-      height: calc(100% - var(--f7-appbar-app-offset,0px));
+  height: calc(100% - var(--f7-appbar-app-offset, 0px));
 `;
 
 export const BasicLayout = (props) => {
@@ -20,12 +19,17 @@ export const BasicLayout = (props) => {
 
   return (
     <Layout className="view view-main view-init safe-areas">
-      <PullToRefresh onRefresh={handleRefresh} isLoading={isLoading}></PullToRefresh>
-      <TopMenu />
+      {props.headerTop && <HeaderTop />}
+      <PullToRefresh
+        onRefresh={handleRefresh}
+        isLoading={isLoading}
+      ></PullToRefresh>
+      <BottomToolbar />
+
       <div className="page page-home page-current">
-        <div className="page-content">
-          
-            {props.children}
+        <div className={`page-content ${props.ptr ? "ptr-content" : ""}`}>
+          {props.ptr ? <PullToRefresh /> : ""}
+          {props.children}
           <div id="fix-f7"></div>
         </div>
       </div>

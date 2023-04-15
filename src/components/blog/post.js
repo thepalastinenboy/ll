@@ -1,39 +1,60 @@
-import React, { useState, useEffect } from "react";
-import articleData from "../../data/KnowledgeBase.json";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { BasicLayout } from "../../layouts/basicLayout";
 import { BackButton } from "../header/backbutton";
 import { CiBookmark } from "react-icons/ci";
 import { FcBookmark } from "react-icons/fc";
-import {MdOutlineFacebook } from "react-icons/md";
-import {IoLogoWhatsapp} from "react-icons/io";
+import { MdOutlineFacebook } from "react-icons/md";
+import { IoLogoWhatsapp } from "react-icons/io";
 import { DiscussionEmbed } from "disqus-react";
+import PreloaderContent from "../elements/preloader-content";
+import { FacebookProvider, Comments } from "react-facebook";
+import { Helmet } from "react-helmet";
+
 
 const Article = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
 
   // Find the article with matching ID
-  const article = articleData.articles.find(
-    (article) => article.id === parseInt(id)
-  );
+  const [article, setArticle] = useState(null);
 
   // State for tracking whether the article has been saved
   const [saved, setSaved] = useState(false);
 
-  const disqusConfig = {
-    shortname: "b2lernen",
-    config: {
-      identifier: article.id.toString(), // Convert the number to a string
-      title: article.title,
-    },
-  };
+  const [disqusConfig, setDisqusConfig] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const disqusRef = useRef(null);
+
+  //get the article from the api
+  useEffect(() => {
+    const fetchArticleData = async () => {
+      try {
+        const response = await fetch(
+          `https://www.b2lernen.de/api/api.php?slug=${slug}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const articleData = await response.json();
+        setArticle(articleData);
+      } catch (error) {
+        console.error("Error fetching article data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticleData();
+  }, [slug]);
+
   // Load saved articles from local storage on component mount
   useEffect(() => {
-    const savedArticles =
-      JSON.parse(localStorage.getItem("savedArticles")) || [];
-    setSaved(savedArticles.includes(article.id));
-  }, [article.id]);
-
+    if (article) {
+      const savedArticles =
+        JSON.parse(localStorage.getItem("savedArticles")) || [];
+      setSaved(savedArticles.includes(article.id));
+    }
+  }, [article]);
   // share button
   const createFacebookShareLink = () => {
     const url = encodeURIComponent(window.location.href);
@@ -43,7 +64,7 @@ const Article = () => {
   // Function to create the WhatsApp share link
   const createWhatsAppShareLink = () => {
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(article.title);
+    const text = encodeURIComponent(article && article.title);
     return `https://wa.me/?text=${text}%20${url}`;
   };
 
@@ -63,15 +84,17 @@ const Article = () => {
   };
 
   // Display the article if found, or an error message if not found
-  return article ? (
-    <BasicLayout>
+  return (
+    <BasicLayout ptr>
       <div className="navbar navbar-transparent">
         <div className="navbar-bg" />
         <div className="navbar-inner">
           <div className="left">
             <BackButton />
           </div>
-          <div className="title title-navbar-transparent">{article.title}</div>
+          <div className="title title-navbar-transparent">
+            {article && article.title}
+          </div>
           <div className="right save-b">
             <button className="button" onClick={handleSaveClick}>
               {saved ? (
@@ -90,11 +113,13 @@ const Article = () => {
             <div className="margin-top">
               <div className="display-flex align-items-center justify-content-space-between">
                 <div className="b2-badge">
-                  <a href="#" className={`badge cat-${article.category}`}>
-                    {article.category}
+                  <a
+                    href="#"
+                    className={`badge cat-${article && article.category}`}
+                  >
+                    {article && article.category}
                   </a>
                 </div>
-
                 <div className="share-buttons">
                   <a
                     href={createFacebookShareLink()}
@@ -110,38 +135,72 @@ const Article = () => {
                     rel="noopener noreferrer"
                     className="whatsapp-share"
                   >
-                    <IoLogoWhatsapp  size="1.8em" />
+                    <IoLogoWhatsapp size="1.8em" />
                   </a>
                 </div>
               </div>
 
-              <h2>{article.title}</h2>
-              <div
-                className="single-post-content margin-top"
-                dangerouslySetInnerHTML={{ __html: article.content }}
-              ></div>
+              {loading ? (
+                <PreloaderContent />
+              ) : article ? (
+                <>
+
+<Helmet>
+          <title>{`${article.title} - B2 Lernen`}</title>
+          {article.description && (
+            <meta name="description" content={article.description} />
+          )}
+          {article.keywords && (
+            <meta
+              name="keywords"
+              content={
+                Array.isArray(article.keywords)
+                  ? article.keywords.join(", ")
+                  : article.keywords
+              }
+            />
+          )}
+          {article.tags && (
+            <meta
+              name="tags"
+              content={
+                Array.isArray(article.tags)
+                  ? article.tags.join(", ")
+                  : article.tags
+              }
+            />
+          )}
+        </Helmet>
+                  <h2>{article.title}</h2>
+                  <div
+                    className="single-post-content margin-top"
+                    dangerouslySetInnerHTML={{ __html: article.content }}
+                  ></div>
+
+                  {/* Add the Disqus component */}
+
+                  <div className="no-margin">
+                    <div className="b2-block-content">
+                      <FacebookProvider appId="1586593491845341">
+                        <Comments href={window.location.href} width="100%" />
+                      </FacebookProvider>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="margin-top">
+                  <div className="display-flex align-items-center justify-content-space-between">
+                    <div className="block-title-medium no-margin block-title text-semibold">
+                      Error: Kein Thema not found
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        </div>
-      </div>
-      {/* Add the Disqus component */}
-      <div className="b2-block no-margin">
-        <div className="b2-block-content">
-          <DiscussionEmbed {...disqusConfig} />
-        </div>
-      </div>
-    </BasicLayout>
-  ) : (
-    <BasicLayout>
-      <div className="b2-block no-border">
-        <div className="b2-block-title display-flex align-items-center justify-content-space-between">
-          <div className="block-title-medium no-margin block-title text-semibold">
-            Error: Kein Thema not found
           </div>
         </div>
       </div>
     </BasicLayout>
   );
 };
-
 export default Article;

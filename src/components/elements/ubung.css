@@ -38,6 +38,10 @@
     font-size: inherit;
 }
 
+.theme-dark .practice-answer-section button {
+    background-color: rgb(28, 28, 29);
+}
+
 .correct {
     background-color: #28a745;
 }

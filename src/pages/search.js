@@ -1,23 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
-import articleData from "../data/KnowledgeBase.json";
 import { BasicLayout } from "../layouts/basicLayout";
 import { BackButton } from "../components/header/backbutton";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [visibleArticles, setVisibleArticles] = useState(5);
+  const [articleData, setArticleData] = useState({ articles: [] });
+  const searchInputRef = useRef();
+
+  useEffect(() => {
+    const fetchArticleData = async () => {
+      try {
+        const response = await fetch("https://www.b2lernen.de/api/api.php");
+        const jsonData = await response.json();
+        setArticleData(jsonData);
+      } catch (error) {
+        console.error("Error fetching article data:", error);
+      }
+    };
+
+    fetchArticleData();
+    searchInputRef.current.focus();
+  }, []);
+
   const filteredArticles = articleData.articles.filter(
     (article) =>
       article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       article.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const searchInputRef = useRef();
-
-  useEffect(() => {
-    searchInputRef.current.focus();
-  }, []);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -27,8 +39,13 @@ const Search = () => {
     setVisibleArticles((prevVisibleArticles) => prevVisibleArticles + 5);
   };
 
+
   return (
     <BasicLayout>
+      <Helmet>
+        <title>{`Suchen - B2 Lernen`}</title>
+        <meta name="keywords" content="deutsch b2 lernen" />
+      </Helmet>
       <div className="navbar navbar-transparent">
         <div className="navbar-bg" />
         <div className="navbar-inner">
@@ -57,7 +74,7 @@ const Search = () => {
           </svg>
           <input
             type="text"
-            placeholder="Search articles"
+            placeholder="Suchen"
             className="input"
             value={searchTerm}
             onChange={handleSearchChange}
@@ -84,7 +101,7 @@ const Search = () => {
           {visibleArticles < filteredArticles.length && (
             <div className="b2-badge text-align-center">
               <div className="badge text-color-red text-color-white" onClick={handleLoadMore}>
-                Load More
+                Mehr laden
               </div>
             </div>
           )}

@@ -100,3 +100,19 @@
 .slideDown {
     transition: transform .5s ease-out;
 } */
+
+.author-card-img {
+    height: 100px !important;
+    border-radius: 10px;
+    background-repeat: no-repeat !important;
+    position: relative;
+    background: #1a1a1a !important;
+}
+
+.theme-light .author-card-img {
+    background: #000000 !important;
+}
+
+.author-card-img .post-author {
+    bottom: 20% !important;
+}

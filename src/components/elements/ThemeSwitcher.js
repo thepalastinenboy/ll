@@ -22,7 +22,7 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <div className="theme-switcher">
+    <div className="theme-switcher link icon-only">
       <div onClick={handleThemeChange}>
         {theme === "theme-light" ? (
           <WiMoonAltWaningCrescent2 />

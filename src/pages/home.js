@@ -1,10 +1,12 @@
 import React from "react";
-import LatestProjectsSwiper from "../components/swipers/latest-project";
+import ThemenSwiper from "../components/swipers/Themen";
 import { HeaderTop } from "../components";
 import { BasicLayout } from "../layouts/basicLayout";
 import { Link } from "react-router-dom";
-// import data from "../data/KnowledgeBase.json";
 import { useNavigate } from "react-router-dom";
+import UbungsListPopular from "../components/elements/ubungbelibte";
+import Greeting from "../components/elements/greeting";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -17,62 +19,11 @@ const Home = () => {
   return (
     <BasicLayout>
       <HeaderTop />
-      <div className="b2-block">
-        <div className="b2-block-title display-flex align-items-center justify-content-space-between">
-          <div>
-            <div className="block-title-medium no-margin block-title text-semibold">
-              Themen
-            </div>
-            <div className="b2-opacity block-title no-margin b2-block-subtitle">
-              Alle B2 Themen
-            </div>
-          </div>
-          <div className="b2-badge">
-            <a href="#" className="badge bg-color-faqehgreen text-color-black">
-              Alle
-            </a>
-          </div>
-        </div>
-        <div className="b2-block-content">
-          <div className="b2-search">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="feather feather-search"
-            >
-              <circle cx={11} cy={11} r={8} />
-              <line x1={21} y1={21} x2="16.65" y2="16.65" />
-            </svg>
-            <input
-              type="text"
-              placeholder="Such ein Thema"
-              className="input"
-              onClick={handleClick}
-            />
-          </div>
-
-          <div className="tags display-flex">
-            {categories.map((category) => (
-              <div key={category} className="b2-badge">
-                <Link
-                  to={`/category/${category}`}
-                  className={`badge cat-${category}`}
-                >
-                  {category}
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
+      <Helmet>
+        <title>{`Deutsch B2 Lernen: Alles, was Sie für den B2-Sprachkurs benötigen - B2 Lernen`}</title>
+        <meta name="keywords" content="deutsch b2 lernen" />
+      </Helmet>
+      <ThemenSwiper />
       <div className="b2-block">
         <div className="b2-block-title display-flex align-items-center justify-content-space-between">
           <div>
@@ -113,22 +64,20 @@ const Home = () => {
               <h4 className="card__title">VERBEN MIT PRÄPOSITIONEN</h4>
             </Link>
             <Link
-              to="/wortschatz/thema-medzin"
+              to="/wortschatz/Thema-Wohnung"
               className="cardw card--style-icon card--style-round-corners"
             >
-              <h4 className="card__title">THEMA MEDZIN</h4>
+              <h4 className="card__title">Thema Wohnung</h4>
             </Link>
           </div>
         </div>
       </div>
 
-      <LatestProjectsSwiper />
-
       <div className="b2-block">
         <div className="b2-block-title display-flex align-items-center justify-content-space-between">
           <div>
             <div className="block-title-medium no-margin block-title text-semibold">
-              Top-Thema
+              Top-Themen
             </div>
             <div className="b2-opacity block-title no-margin b2-block-subtitle">
               Am liebsten besucht
@@ -138,58 +87,65 @@ const Home = () => {
         <div className="b2-block-content">
           <div className="blog-list-wrapper">
             <div className="blog-list display-flex align-items-start">
-              <div className="blog-list-infos margin-left">
+              <div className="blog-list-infos">
                 <div className="b2-badge">
-                  <a href="#" className="badge cat-schreiben">
+                  <Link to="article/10" className="badge cat-schreiben">
                     Schreiben
-                  </a>
+                  </Link>
                 </div>
                 <h2 className="margin-bottom-half">
-                  <a href="/single/">Beschwerde über eine Reise</a>
+                  <Link to="article/10">
+                    Beschwerde über Internationale Begegung.
+                  </Link>
                 </h2>
               </div>
             </div>
 
             <div className="blog-list display-flex align-items-start">
-              <div className="blog-list-infos margin-left">
+              <div className="blog-list-infos">
                 <div className="b2-badge">
-                  <a href="#" className="badge cat-grammatik">
+                  <Link to="article/11" className="badge cat-grammatik">
                     Grammatik
-                  </a>
+                  </Link>
                 </div>
                 <h2 className="margin-bottom-half">
-                  <a href="/single/">Das Passiv</a>
+                  <Link to="article/11">Partizipien als Adjektive</Link>
                 </h2>
               </div>
             </div>
 
             <div className="blog-list display-flex align-items-start">
-              <div className="blog-list-infos margin-left">
+              <div className="blog-list-infos">
                 <div className="b2-badge">
-                  <a href="#" className="badge cat-redemitteln">
+                  <Link to="article/8" className="badge cat-redemitteln">
                     Redemitteln
-                  </a>
+                  </Link>
                 </div>
                 <h2 className="margin-bottom-half">
-                  <a href="/single/">Diskkussion Redemitteln</a>
+                  <Link to="article/8">Diskkussion Redemitteln</Link>
                 </h2>
               </div>
             </div>
             <div className="blog-list display-flex align-items-start">
-              <div className="blog-list-infos margin-left">
+              <div className="blog-list-infos">
                 <div className="b2-badge">
-                  <a href="#" className="badge color-purple cat-wortarten">
-                    Wortschatz
-                  </a>
+                  <Link
+                    to="article/1"
+                    className="badge color-purple cat-wortarten"
+                  >
+                    Grammatik
+                  </Link>
                 </div>
                 <h2 className="margin-bottom-half">
-                  <a href="/single/">Verben mit Präpositsion</a>
+                  <Link to="article/1">Zweiteilige Konnektoren</Link>
                 </h2>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <UbungsListPopular />
     </BasicLayout>
   );
 };

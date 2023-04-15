@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import {CgMenuRight} from "react-icons/cg";
 import {TbLetterW} from "react-icons/tb";
 import { GoHome} from "react-icons/go";
 
 
 
-export const TopMenu = () => {
+export const BottomToolbar = () => {
     return(
       <div className="toolbar toolbar-bottom tabbar-labels">
       <div className="toolbar-inner">

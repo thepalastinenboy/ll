@@ -33,18 +33,11 @@ const PullToRefresh = ({ onRefresh, isLoading, children }) => {
       style={{ overflowY: "scroll" }}
     >
       {isLoading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "50px",
-            color: "gray",
-          }}
-        >
-          <div className="loader"></div>
-          <span style={{ marginLeft: "10px" }}>Loading...</span>
-        </div>
+        <div className="ptr-preloader">
+        <div className="preloader" />
+        <div className="ptr-arrow" />
+      </div>
+      
       ) : (
         children
       )}

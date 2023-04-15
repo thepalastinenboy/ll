@@ -1,13 +1,10 @@
 .wortschatz-v {
     margin: 0 auto;
     max-width: 100%;
-    padding-top: 30px;
 }
 
 .wortschatz-v-item {
-    margin: 20px;
     padding: 20px;
-    text-align: center;
 }
 
 .wortschatz-v-item p {
@@ -28,7 +25,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    color: white;
+    color: inherit;
 }
 
 .wortschatz-v .button-container-nav button {
@@ -37,7 +34,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    color: black;
+    color: inherit;
     height: 6em;
     width: 6em;
 }
@@ -69,7 +66,5 @@
 }
 
 .slide-number {
-    text-align: center;
     margin: 0;
-    font-size: 34px;
 }

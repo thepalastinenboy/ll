@@ -1,0 +1,56 @@
+{/* <Greeting /> */}
+      <div className="b2-block">
+        <div className="b2-block-title display-flex align-items-center justify-content-space-between">
+          <div>
+            <div className="block-title-medium no-margin block-title text-semibold">
+              Themen
+            </div>
+            <div className="b2-opacity block-title no-margin b2-block-subtitle">
+              Alle B2 Themen
+            </div>
+          </div>
+          <div className="b2-badge">
+            <Link to="Kategorie-Liste" className="badge bg-color-faqehgreen text-color-black">
+              Alle
+            </Link>
+          </div>
+        </div>
+        <div className="b2-block-content">
+          <div className="b2-search">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-search"
+            >
+              <circle cx={11} cy={11} r={8} />
+              <line x1={21} y1={21} x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Suchen"
+              className="input"
+              onClick={handleClick}
+            />
+          </div>
+
+          <div className="tags display-flex">
+            {categories.map((category) => (
+              <div key={category} className="b2-badge">
+                <Link
+                  to={`/category/${category}`}
+                  className={`badge cat-${category}`}
+                >
+                  {category}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>

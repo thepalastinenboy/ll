@@ -1,10 +1,7 @@
 import React from "react";
-
-
-
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export const BackButton =() => {
+export const BackButton = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,8 +12,8 @@ export const BackButton =() => {
   };
 
   return (
-    <div  className="link" onClick={handleOnClick} disabled={isHome}>
+    <div className="link" onClick={handleOnClick} disabled={isHome}>
       <i className="icon icon-forward" />
     </div>
   );
-}
+};

@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { Logo } from "./logo";
-import { CenterdMenu } from "../menus/CenterdMenu";
-import { ThemeSwitcher1 } from "./themeSwitcher1";
-import { MenuButton } from "./menuButton";
-import { TopMenu } from "./topMenu";
 import ThemeSwitcher from "../elements/ThemeSwitcher";
 
 export const HeaderTop = (props) => {

@@ -3,18 +3,24 @@ import KnowledgeBase from "../components/blog/category";
 import Article from "../components/blog/post";
 import Home from "../pages/home";
 import Search from "../pages/search";
-import Wortschatz from "../pages/wortschatz";
+import {Wortschatz }from "../pages/wortschatz";
 import Navigation from "../pages/navigation";
 import UbungsList from "../pages/UbungsList";
 import SavedContent from "../pages/saved";
 import WortschatzList from "../pages/wortschatzlist";
 import GermanLanguagePractice from "../components/elements/ubung";
+import {Loader} from "../components";
 import { useLocation } from "react-router-dom";
 import ContactPage from "../pages/contactme";
+import CategoryList  from "../pages/categoryList";
+import DrawNotes from "../pages/DrawNotes";
+import About from "../pages/about";
+import Imprussum from "../pages/imprussum";
 import "./app.css";
 import AddArticle from "../pages/addarticle";
 import { BrowserRouter, Routes, Route, Switch } from "react-router-dom";
 import InstallPWAButton from './InstallPWAButton';
+
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -29,7 +35,7 @@ const ScrollToTop = () => {
 const dataFiles = [
   { filename: "verben.json", data: null },
   { filename: "Verben mit Präpositionen.json", data: null },
-  { filename: "Thema Medzin.json", data: null },
+  { filename: "Thema Wohnung.json", data: null },
   { filename: "Beschwerde-Redemitteln.json", data: null },
   // Add more data files here
 ];
@@ -72,22 +78,15 @@ const App = () => {
     });
   }, []);
 
-  // Render a loading indicator while the data is being loaded
-  if (isLoadingData) {
-    return (
-      <div
-        className="loader-container"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
-        <div className="loader"></div>
-      </div>
+   // Render a loading indicator while the data is being loaded
+   if (isLoadingData) {
+    return ( 
+      <BrowserRouter>
+        <Loader withHeader />   
+    </BrowserRouter>
     );
   }
+
 
   return (
     <>
@@ -118,13 +117,17 @@ const App = () => {
           ))}
           <Route exact path="/navigation" element={<Navigation />} />
           <Route exact path="/saved" element={<SavedContent />} />
+          <Route exact path="/about" element={<About />} />
+          <Route exact path="/imprussum" element={<Imprussum />} />
+          <Route exact path="/zeichnen" element={<DrawNotes />} />
           <Route path="/category/:category" element={<KnowledgeBase />} />
-          <Route exact path="/article/:id" element={<Article />} />
+          <Route path="/Kategorie-Liste" element={<CategoryList />} />
+          <Route path="/article/:slug" element={<Article />} />
           <Route path="/ubung/:slug" element={<GermanLanguagePractice />} />
           <Route path="/uebungen" element={<UbungsList />} />
           <Route path="/search" element={<Search />} />
           <Route exact path="/Kontakt" element={<ContactPage />} />
-          <Route exact path="/add" element={<AddArticle />} />
+          <Route exact path="/addd" element={<AddArticle />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>

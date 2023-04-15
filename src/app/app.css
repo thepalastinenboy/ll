@@ -50272,17 +50272,17 @@ a.link.icon-only.b2-notification {
 }
 
 .cat-schreiben {
-    background: #ffc4c4 !important;
+    background: #7fd957bf !important;
     color: black !important;
 }
 
 .cat-redemitteln {
-    background: #00c5ffad !important;
-    color: black !important;
+    background: rgb(35 34 136) !important;
+    color: white !important;
 }
 
 .cat-wortarten {
-    background: #ffcdfc !important;
+    background: #9c53e8c9 !important;
     color: black !important;
 }
 
@@ -50293,14 +50293,21 @@ a.link.icon-only.b2-notification {
 
 .toolbar-bottom .toolbar-inner a:nth-child(2) {
     color: #b854bd;
+    box-shadow: rgb(184 84 189) 0px 0px 10px -1px;
 }
 
 .toolbar-bottom .toolbar-inner a:nth-child(1) {
     color: #7fd957;
+    box-shadow: rgb(127 217 87) 0px 0px 10px -1px;
 }
 
 .toolbar-bottom .toolbar-inner a:nth-child(3) {
     color: #9897ff;
+    box-shadow: rgb(152 151 255) 0px 0px 10px -1px;
+}
+
+.md .tabbar-labels .link {
+    background: #000000;
 }
 
 .loader {
@@ -50349,6 +50356,11 @@ a.link.icon-only.b2-notification {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+.theme-dark .wortschatz-item {
+    background-color: #1c1c1d;
+    ;
+}
+
 .list-saved>div {
     padding-bottom: 16px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -50362,6 +50374,10 @@ a.link.icon-only.b2-notification {
 
 .p-10 {
     padding: 10px !important;
+}
+
+#fix-f7 {
+    height: 100px !important;
 }
 
 .navbar .title {
@@ -50402,6 +50418,11 @@ a.link.icon-only.b2-notification {
     color: white;
 }
 
+.theme-dark body,
+body.theme-dark {
+    background: #121212;
+}
+
 
 /* big screen */
 
@@ -50419,8 +50440,10 @@ a.link.icon-only.b2-notification {
     .page-content>div:first-of-type {
         overflow: unset !important;
     }
-    .single-post-content {
+    .theme-light .single-post-content {
         color: #0b0b0b !important;
+    }
+    .single-post-content {
         max-width: 600px;
         margin: 0 auto;
     }
@@ -50489,4 +50512,110 @@ a.link.icon-only.b2-notification {
 
 .page-content {
     padding-bottom: 60px;
+}
+
+.fade-enter {
+    opacity: 0;
+    z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+}
+
+.an-incorrect {
+    fill: red;
+    color: red;
+}
+
+.an-correct {
+    fill: green;
+    color: green
+}
+
+
+/*! shimmer preloader */
+
+.preloader-shimmer {
+    position: relative;
+    background: #3a3a3a;
+    background-image: linear-gradient(to right, #3a3a3a 0%, #3f3f3f 10%, #4a4a4a 20%, #3f3f3f 30%, #3a3a3a 50%, #3a3a3a 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 200px;
+    /* Animantion */
+    -webkit-animation-duration: 1s;
+    /* Specifies style for element when animation isn't playing */
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: shimmer;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes shimmer {
+    0% {
+        background-position: -400px 0;
+    }
+    100% {
+        background-position: 400px 0;
+    }
+}
+
+.theme-light .preloader-shimmer {
+    background: #f6f7f8;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #f2f4f7 10%, #f0f0f2 20%, #f2f4f7 30%, #f6f7f8 40%, #f6f7f8 100%);
+}
+
+#preloader-container {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#preloader-content {
+    flex: 1;
+    height: 150px;
+    width: 100%;
+    padding: 0.5rem 1rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+#preloader-title {
+    width: 100%;
+    height: 10px;
+    margin-bottom: 1rem;
+}
+
+#preloader-desc {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.preloader-line {
+    width: 100%;
+    height: 10px;
+}
+
+.navbar .title,
+.navbar span {
+    font-size: 14px;
+    line-height: 1.4;
 }
