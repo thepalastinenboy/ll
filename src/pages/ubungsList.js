@@ -16,7 +16,7 @@ const UbungsList = () => {
   };
   
   useEffect(() => {
-    fetch("https://www.b2lernen.de/api/ubungs-api.php")
+    fetch("https://ubai.dev/b2lernen.de/api/ubungs-api.php")
       .then((response) => response.json())
       .then((data) => {
         setPractices(data.practices);

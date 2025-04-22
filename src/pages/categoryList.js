@@ -7,7 +7,7 @@ const CategoryList = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://www.b2lernen.de/api/api.php")
+    fetch("https://ubai.dev/b2lernen.de/api/api.php")
       .then((response) => response.json())
       .then((data) => {
         // Get a list of unique categories

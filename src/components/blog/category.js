@@ -9,76 +9,87 @@ import { Helmet } from "react-helmet";
 
 
 
-
 const KnowledgeBase = () => {
-  const { category } = useParams();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [articles, setArticles] = useState([]);
+  const { id } = useParams(); // Extract the `id` parameter from the URL
+  const [subSubjects, setSubSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const location = useLocation();
-  const previousLocation = location.state?.from;
 
+  // Fetch sub-subjects for the given main subject
   useEffect(() => {
-    setLoading(true);
-    fetch("https://www.b2lernen.de/api/api.php")
-      .then((response) => response.json())
-      .then((data) => {
-        setArticles(data.articles);
+    const fetchSubSubjects = async () => {
+      try {
+        if (!id) {
+          throw new Error("ID is missing in the URL");
+        }
+
+        const response = await fetch(
+          `https://wh467262.ispot.cc/note-website-backend/api/subjects/main-subjects/${id}/`
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setSubSubjects(data.sub_subjects); // Extract sub-subjects from the response
+      } catch (error) {
+        console.error("Error fetching sub-subjects:", error);
+      } finally {
         setLoading(false);
-      });
-  }, []);
+      }
+    };
 
-  const filteredArticles = articles.filter(
-    (article) =>
-      article.category.toLowerCase() === category.toLowerCase() &&
-      article.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+    fetchSubSubjects();
+  }, [id]);
 
   return (
     <BasicLayout headerTop>
       <Helmet>
-                <title>{`${category} - B2 Lernen`}</title>
-                <meta name="keywords" content={`${category},deutsch ,b2 lernen`} />
-              </Helmet>
+        <title>Sub-Subjects - Knowledge Base</title>
+        <meta name="keywords" content="sub-subjects, knowledge base, notes" />
+      </Helmet>
       <div className="navbar navbar-transparent">
         <div className="navbar-bg"></div>
         <div className="navbar-inner">
           <div className="left">
             <BackButton />
           </div>
-          <div className="title title-navbar-transparent">{category}</div>
+          <div className="title title-navbar-transparent">Sub-Subjects</div>
         </div>
       </div>
       <div className="b2-block no-border">
         <div className="b2-opacity block-title no-margin b2-block-subtitle">
-        Übersicht Detusch B2 {category}
+          Overview of Sub-Subjects
         </div>
       </div>
 
       {loading ? (
         <Loader />
-      ) : (
+      ) : subSubjects.length > 0 ? (
         <div className="b2-block no-border">
           <div className="b2-block-content">
             <div className="blog-list-wrapper">
-              {filteredArticles.map((article) => (
+              {subSubjects.map((subject) => (
                 <div
-                  key={article.id}
+                  key={subject.id}
                   className="blog-list display-flex align-items-start flex-direction-row-reverse"
                 >
                   <div className="blog-list-infos margin-right margin-top">
                     <h2 className="margin-bottom-half no-margin-top">
-                      <Link to={`/article/${article.slug}`}>{article.title}</Link>
+                      <Link to={`/sub-subject/${subject.slug}`}>
+                        {subject.name}
+                      </Link>
                     </h2>
+                    <p className="description">{subject.content?.slice(0, 150)}...</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+      ) : (
+        <div className="no-results">
+          <p>No sub-subjects found for this category.</p>
         </div>
       )}
     </BasicLayout>

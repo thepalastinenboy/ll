@@ -5,9 +5,11 @@ import Home from "../pages/home";
 import Search from "../pages/search";
 import {Wortschatz }from "../pages/wortschatz";
 import Navigation from "../pages/navigation";
-import UbungsList from "../pages/UbungsList";
+import UbungsList from "../pages/ubungsList";  // Correct path for lower-case "ubungsList.js"
+
 import SavedContent from "../pages/saved";
-import WortschatzList from "../pages/wortschatzlist";
+import WortschatzList from "../pages/wortschatzList";  // Correct path for lower-case "wortschatzList.js"
+
 import GermanLanguagePractice from "../components/elements/ubung";
 import {Loader} from "../components";
 import { useLocation } from "react-router-dom";
@@ -120,10 +122,10 @@ const App = () => {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/imprussum" element={<Imprussum />} />
           <Route exact path="/zeichnen" element={<DrawNotes />} />
-          <Route path="/category/:category" element={<KnowledgeBase />} />
+          <Route path="/category/:id" element={<KnowledgeBase />} />
           <Route path="/Kategorie-Liste" element={<CategoryList />} />
-          <Route path="/article/:slug" element={<Article />} />
-          <Route path="/ubung/:slug" element={<GermanLanguagePractice />} />
+          <Route path="/sub-subject/:slug" element={<Article />} />
+          <Route path="/ubung/:id" element={<GermanLanguagePractice />} />
           <Route path="/uebungen" element={<UbungsList />} />
           <Route path="/search" element={<Search />} />
           <Route exact path="/Kontakt" element={<ContactPage />} />

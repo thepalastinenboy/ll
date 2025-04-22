@@ -9,59 +9,62 @@ import PreloaderContent from "./preloader-content";
 import { Helmet } from "react-helmet";
 
 const GermanLanguagePractice = () => {
-  const { slug } = useParams();
-  const [practices, setPractices] = useState([]);
+  const { id } = useParams(); // Extract the `id` parameter from the URL
+  const [practices, setPractices] = useState([]); // Store all practices
   const [isLoading, setIsLoading] = useState(true);
-  const practiceData = practices.find((practice) => practice.slug === slug);
+  const practiceData = practices.find((practice) => practice.id === parseInt(id)); // Match by `id`
 
+  // Fetch practices data
   useEffect(() => {
-    fetch("https://www.b2lernen.de/api/ubungs-api.php")
+    fetch("https://wh467262.ispot.cc/note-website-backend/api/practices/practices/")
       .then((response) => response.json())
       .then((data) => {
-        setPractices(data.practices);
+        setPractices(data); // Store all practices
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching practices:", error);
         setIsLoading(false);
       });
   }, []);
 
+  // State for the current question and progress
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [progress, setProgress] = useState(0); // Add progress state
-  const [isSavedForLater, setIsSavedForLater] = useState(false); // Add state for saved for later
+  const [progress, setProgress] = useState(0); // Progress state
+  const [isSavedForLater, setIsSavedForLater] = useState(false); // Saved state
 
+  // Check if the practice is already completed or saved
   useEffect(() => {
     if (practiceData) {
       const storedCompletedPractices =
         JSON.parse(localStorage.getItem("completedPractices")) || [];
-      if (storedCompletedPractices.includes(practiceData.slug)) {
-        setIsCompleted(true);
-      }
+      setIsCompleted(storedCompletedPractices.includes(practiceData.id));
+
       const storedSavedPractices =
         JSON.parse(localStorage.getItem("savedPractices")) || [];
-      if (storedSavedPractices.includes(practiceData.slug)) {
-        setIsSavedForLater(true);
-      }
+      setIsSavedForLater(storedSavedPractices.includes(practiceData.id));
     }
   }, [practiceData]);
 
+  // Save completed practice to localStorage
   useEffect(() => {
-    if (practiceData) {
+    if (practiceData && isCompleted) {
       const storedCompletedPractices =
         JSON.parse(localStorage.getItem("completedPractices")) || [];
-      if (
-        isCompleted &&
-        !storedCompletedPractices.includes(practiceData.slug)
-      ) {
+      if (!storedCompletedPractices.includes(practiceData.id)) {
         localStorage.setItem(
           "completedPractices",
-          JSON.stringify([...storedCompletedPractices, practiceData.slug])
+          JSON.stringify([...storedCompletedPractices, practiceData.id])
         );
       }
     }
   }, [isCompleted, practiceData]);
 
+  // Handle answer click
   const handleAnswerOptionClick = (isCorrect) => {
     if (isCorrect) {
       setScore(score + 1);
@@ -72,36 +75,36 @@ const GermanLanguagePractice = () => {
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < practiceData.questions.length) {
       setCurrentQuestion(nextQuestion);
-      setProgress((nextQuestion / practiceData.questions.length) * 100); // Update progress
+      setProgress((nextQuestion / practiceData.questions.length) * 100);
     } else {
       setShowScore(true);
-      setIsCompleted(true); // Mark practice as completed
+      setIsCompleted(true);
     }
   };
 
+  // Handle "Remake Practice" button
   const handleRemakePracticeClick = () => {
     setShowScore(false);
     setScore(0);
     setIncorrectAnswers([]);
     setCurrentQuestion(0);
     setIsCompleted(false);
-    setProgress(0); // Reset progress
+    setProgress(0);
   };
 
+  // Handle "Save for Later" button
   const handleSaveForLaterClick = () => {
     const storedSavedPractices =
       JSON.parse(localStorage.getItem("savedPractices")) || [];
     if (!isSavedForLater) {
-      // Add current practice to saved practices
       localStorage.setItem(
         "savedPractices",
-        JSON.stringify([...storedSavedPractices, practiceData.slug])
+        JSON.stringify([...storedSavedPractices, practiceData.id])
       );
       setIsSavedForLater(true);
     } else {
-      // Remove current practice from saved practices
       const updatedSavedPractices = storedSavedPractices.filter(
-        (slug) => slug !== practiceData.slug
+        (pid) => pid !== practiceData.id
       );
       localStorage.setItem(
         "savedPractices",
@@ -110,22 +113,31 @@ const GermanLanguagePractice = () => {
       setIsSavedForLater(false);
     }
   };
-
   const getAnswerClass = (index) => {
     if (showScore) {
-      if (practiceData.questions[currentQuestion].answerIndex === index) {
-        return "an-correct";
+      const currentAnswer = practiceData.questions[currentQuestion];
+      if (currentAnswer.answerOptions[index].isCorrect) {
+        return "an-correct"; // Correct answer
       } else if (
         incorrectAnswers.includes(currentQuestion) &&
-        practiceData.questions[currentQuestion].answerIndex !== index &&
-        currentQuestion === incorrectAnswers.indexOf(index)
+        !currentAnswer.answerOptions[index].isCorrect
       ) {
-        return "an-incorrect";
+        return "an-incorrect"; // Incorrect answer
       }
     }
-    return "";
+    return ""; // Default class
   };
 
+  // Render loading state
+  if (isLoading) {
+    return (
+      <BasicLayout headerTop>
+        <PreloaderContent />
+      </BasicLayout>
+    );
+  }
+
+  // Render error state
   if (!practiceData) {
     return (
       <BasicLayout headerTop>
@@ -135,43 +147,32 @@ const GermanLanguagePractice = () => {
             <div className="left">
               <BackButton />
             </div>
-            <div className="title title-navbar-transparent">
-              {practiceData && practiceData.name}
-            </div>
-            <div className="right save-b">
-              <button className="button" onClick={practiceData &&  handleSaveForLaterClick}>
-                { isSavedForLater ? (
-                  <FcBookmark size="2em" color="#38ccc7" className="saved-a" />
-                ) : (
-                  <CiBookmark size="2em" />
-                )}
-              </button>
-            </div>
+            <div className="title title-navbar-transparent">Keine Übung gefunden</div>
           </div>
         </div>
         <div className="b2-block no-border">
           <div className="b2-block-content">
-            {isLoading ? <PreloaderContent /> : <div>Kein Übung gefunden</div> }
+            <div>Die angeforderte Übung wurde nicht gefunden.</div>
           </div>
         </div>
       </BasicLayout>
     );
   }
+
+  // Render the practice
   return (
     <BasicLayout headerTop>
+      <Helmet>
+        <title>{`${practiceData.title} Übung - B2 Lernen`}</title>
+        <meta name="keywords" content={`${practiceData.title}, Übung, Deutsch, B2 Lernen`} />
+      </Helmet>
       <div className="navbar navbar-transparent">
         <div className="navbar-bg" />
         <div className="navbar-inner">
           <div className="left">
             <BackButton />
           </div>
-          <div className="title title-navbar-transparent">
-            {practiceData && practiceData.name}
-          </div>
-          <Helmet>
-                <title>{`${practiceData && practiceData.name} Übung - B2 Lernen`}</title>
-                <meta name="keywords" content={`${practiceData && practiceData.name} Übung,deutsch ,b2 lernen`} />
-              </Helmet>
+          <div className="title title-navbar-transparent">{practiceData.title}</div>
           <div className="right save-b">
             <button className="button" onClick={handleSaveForLaterClick}>
               {isSavedForLater ? (
@@ -183,103 +184,77 @@ const GermanLanguagePractice = () => {
           </div>
         </div>
       </div>
-
-      {isLoading ? (
-        <PreloaderContent /> 
-      ) : (
-        <div className="b2-block">
-          <div className="block-content">
-            {/* {isCompleted && (
-            <div className="practice-completed-message">
-              You have completed this practice!
-            </div>
-          )} */}
-            {showScore ? (
-              <div className="b2-block no-border">
-                <div className="b2-block-content">
-                  <div className="list-co-or-wr">
-                    <h3 className="margin-bottom ">
-                      {" "}
-                      Du hast von <b>{score}</b> von{" "}
-                      <b>{practiceData.questions.length}</b> Punkten erreicht.
-                    </h3>
-                    {practiceData.questions.map((question, index) => (
-                      <div className="margin-bottom" key={index}>
-                        <div
-                          className={`display-flex align-items-center justify-content-space-between no-border`}
-                        >
-                          <div className="list-item-seved display-flex align-items-center">
-                            <div className="post-author display-flex align-items-center">
-                              <div>
-                                <span className="post-author-name display-block">
-                                  {question.sentence}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="b2-badge">
-                              {/* {getAnswerClass(index)} */}
-                            </div>
+      <div className="b2-block">
+        <div className="block-content">
+          {showScore ? (
+            <div className="b2-block no-border">
+              <div className="b2-block-content">
+                <div className="list-co-or-wr">
+                  <h3 className="margin-bottom">
+                    Du hast <b>{score}</b> von <b>{practiceData.questions.length}</b> Punkten erreicht.
+                  </h3>
+                  {practiceData.questions.map((question, index) => (
+                    <div className="margin-bottom" key={index}>
+                      <div className="display-flex align-items-center justify-content-space-between no-border">
+                        <div className="list-item-seved display-flex align-items-center">
+                          <div className="post-author display-flex align-items-center">
+                            <span className="post-author-name display-block">
+                              {question.text}
+                            </span>
                           </div>
                         </div>
-                        <div className="answer-text text-semibold">
-                          Richtige Antwort:{" "}
-                          <span className="an-correct">
-                            {
-                              question.answerOptions.find(
-                                (option) => option.isCorrect
-                              ).answerText
-                            }
-                          </span>
-                        </div>
                       </div>
-                    ))}
-                    <div className="block block-strong block-outline-ios">
-                      <div className="grid grid-cols-3 grid-gap">
-                        <button
-                          className="button button-tonal"
-                          onClick={handleRemakePracticeClick}
-                        >
-                          Nochmal machen
-                        </button>
+                      <div className="answer-text text-semibold">
+                        Richtige Antwort:{" "}
+                        <span className="an-correct">
+                          {
+                            question.answers.find((a) => a.is_correct).text
+                          }
+                        </span>
                       </div>
+                    </div>
+                  ))}
+                  <div className="block block-strong block-outline-ios">
+                    <div className="grid grid-cols-3 grid-gap">
+                      <button
+                        className="button button-tonal"
+                        onClick={handleRemakePracticeClick}
+                      >
+                        Nochmal machen
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-            ) : (
-              <>
-                <div className="practice-question-section">
-                  <div className="practice-progress-section">
-                    <div
-                      className="progress-bar"
-                      style={{ width: `${progress}%` }}
-                    ></div>
-                  </div>
-                  <div className="practice-question-text">
-                    {practiceData.questions[currentQuestion].sentence}
-                  </div>
+            </div>
+          ) : (
+            <>
+              <div className="practice-question-section">
+                <div className="practice-progress-section">
+                  <div
+                    className="progress-bar"
+                    style={{ width: `${progress}%` }}
+                  ></div>
                 </div>
-                <div className="practice-answer-section">
-                  {practiceData.questions[currentQuestion] &&
-                    practiceData.questions[currentQuestion].answerOptions.map(
-                      (answerOption, index) => (
-                        <button
-                          key={index}
-                          onClick={() =>
-                            handleAnswerOptionClick(answerOption.isCorrect)
-                          }
-                          className={getAnswerClass(index)}
-                        >
-                          {answerOption.answerText}
-                        </button>
-                      )
-                    )}
+                <div className="practice-question-text">
+                  {practiceData.questions[currentQuestion].text}
                 </div>
-              </>
-            )}
-          </div>
+              </div>
+              <div className="practice-answer-section">
+                {practiceData.questions[currentQuestion].answers.map((answer, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswerOptionClick(answer.is_correct)}
+                    className={getAnswerClass(index)} // Use getAnswerClass here
+                  >
+                    {answer.text}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
         </div>
-      )}
+      </div>
     </BasicLayout>
   );
 };

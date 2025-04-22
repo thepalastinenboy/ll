@@ -24,7 +24,7 @@ const ContactPage = () => {
     setMessageStatus(null);
 
     try {
-      const response = await fetch("https://www.b2lernen.de/sendMail.php", {
+      const response = await fetch("https://ubai.dev/b2lernen.de/sendMail.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

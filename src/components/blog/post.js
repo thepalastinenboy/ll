@@ -11,79 +11,80 @@ import PreloaderContent from "../elements/preloader-content";
 import { FacebookProvider, Comments } from "react-facebook";
 import { Helmet } from "react-helmet";
 
-
 const Article = () => {
   const { slug } = useParams();
 
-  // Find the article with matching ID
-  const [article, setArticle] = useState(null);
+  // State for storing the sub-subject data
+  const [subSubject, setSubSubject] = useState(null);
 
-  // State for tracking whether the article has been saved
+  // State for tracking whether the sub-subject has been saved
   const [saved, setSaved] = useState(false);
 
-  const [disqusConfig, setDisqusConfig] = useState(null);
+  // State for loading status
   const [loading, setLoading] = useState(true);
-  const disqusRef = useRef(null);
 
-  //get the article from the api
+  // Fetch the sub-subject from the API
   useEffect(() => {
-    const fetchArticleData = async () => {
+    const fetchSubSubjectData = async () => {
       try {
         const response = await fetch(
-          `https://www.b2lernen.de/api/api.php?slug=${slug}`
+          `https://wh467262.ispot.cc/note-website-backend/api/subjects/sub-subjects/${slug}/`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const articleData = await response.json();
-        setArticle(articleData);
+        const subSubjectData = await response.json();
+        setSubSubject(subSubjectData);
       } catch (error) {
-        console.error("Error fetching article data:", error);
+        console.error("Error fetching sub-subject data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchArticleData();
+    fetchSubSubjectData();
   }, [slug]);
 
-  // Load saved articles from local storage on component mount
+  // Load saved sub-subjects from local storage on component mount
   useEffect(() => {
-    if (article) {
-      const savedArticles =
-        JSON.parse(localStorage.getItem("savedArticles")) || [];
-      setSaved(savedArticles.includes(article.id));
+    if (subSubject) {
+      const savedSubSubjects =
+        JSON.parse(localStorage.getItem("savedSubSubjects")) || [];
+      setSaved(savedSubSubjects.includes(subSubject.id));
     }
-  }, [article]);
-  // share button
+  }, [subSubject]);
+
+  // Create Facebook share link
   const createFacebookShareLink = () => {
     const url = encodeURIComponent(window.location.href);
     return `https://www.facebook.com/sharer/sharer.php?u=${url}`;
   };
 
-  // Function to create the WhatsApp share link
+  // Create WhatsApp share link
   const createWhatsAppShareLink = () => {
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(article && article.title);
+    const text = encodeURIComponent(subSubject?.name || "");
     return `https://wa.me/?text=${text}%20${url}`;
   };
 
-  // Function to save or unsave the article
+  // Save or unsave the sub-subject
   const handleSaveClick = () => {
-    const savedArticles =
-      JSON.parse(localStorage.getItem("savedArticles")) || [];
+    const savedSubSubjects =
+      JSON.parse(localStorage.getItem("savedSubSubjects")) || [];
     if (saved) {
-      const index = savedArticles.indexOf(article.id);
-      savedArticles.splice(index, 1);
-      localStorage.setItem("savedArticles", JSON.stringify(savedArticles));
+      const index = savedSubSubjects.indexOf(subSubject?.id);
+      if (index > -1) {
+        savedSubSubjects.splice(index, 1);
+        localStorage.setItem("savedSubSubjects", JSON.stringify(savedSubSubjects));
+      }
     } else {
-      savedArticles.push(article.id);
-      localStorage.setItem("savedArticles", JSON.stringify(savedArticles));
+      savedSubSubjects.push(subSubject?.id);
+      localStorage.setItem("savedSubSubjects", JSON.stringify(savedSubSubjects));
     }
     setSaved(!saved);
   };
 
-  // Display the article if found, or an error message if not found
+  // Display the sub-subject if found, or an error message if not found
   return (
     <BasicLayout ptr>
       <div className="navbar navbar-transparent">
@@ -93,7 +94,7 @@ const Article = () => {
             <BackButton />
           </div>
           <div className="title title-navbar-transparent">
-            {article && article.title}
+            {subSubject ? subSubject.name : "Loading..."}
           </div>
           <div className="right save-b">
             <button className="button" onClick={handleSaveClick}>
@@ -115,9 +116,9 @@ const Article = () => {
                 <div className="b2-badge">
                   <a
                     href="#"
-                    className={`badge cat-${article && article.category}`}
+                    className={`badge cat-${subSubject?.main_subject?.id || "unknown"}`}
                   >
-                    {article && article.category}
+                    {subSubject?.main_subject?.name || "Unknown Category"}
                   </a>
                 </div>
                 <div className="share-buttons">
@@ -142,43 +143,20 @@ const Article = () => {
 
               {loading ? (
                 <PreloaderContent />
-              ) : article ? (
+              ) : subSubject ? (
                 <>
-
-<Helmet>
-          <title>{`${article.title} - B2 Lernen`}</title>
-          {article.description && (
-            <meta name="description" content={article.description} />
-          )}
-          {article.keywords && (
-            <meta
-              name="keywords"
-              content={
-                Array.isArray(article.keywords)
-                  ? article.keywords.join(", ")
-                  : article.keywords
-              }
-            />
-          )}
-          {article.tags && (
-            <meta
-              name="tags"
-              content={
-                Array.isArray(article.tags)
-                  ? article.tags.join(", ")
-                  : article.tags
-              }
-            />
-          )}
-        </Helmet>
-                  <h2>{article.title}</h2>
+                  <Helmet>
+                    <title>{`${subSubject.name} - Notes Website`}</title>
+                    <meta name="description" content={subSubject.content?.slice(0, 150)} />
+                    <meta name="keywords" content={subSubject.main_subject?.name} />
+                  </Helmet>
+                  <h2>{subSubject.name}</h2>
                   <div
                     className="single-post-content margin-top"
-                    dangerouslySetInnerHTML={{ __html: article.content }}
+                    dangerouslySetInnerHTML={{ __html: subSubject.content }}
                   ></div>
 
-                  {/* Add the Disqus component */}
-
+                  {/* Add the Facebook comments component */}
                   <div className="no-margin">
                     <div className="b2-block-content">
                       <FacebookProvider appId="1586593491845341">
@@ -191,7 +169,7 @@ const Article = () => {
                 <div className="margin-top">
                   <div className="display-flex align-items-center justify-content-space-between">
                     <div className="block-title-medium no-margin block-title text-semibold">
-                      Error: Kein Thema not found
+                      Error: Sub-Subject Not Found
                     </div>
                   </div>
                 </div>
@@ -203,4 +181,5 @@ const Article = () => {
     </BasicLayout>
   );
 };
+
 export default Article;
