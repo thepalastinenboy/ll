@@ -4,22 +4,17 @@ import { HeaderTop } from "../components";
 import PreloaderContent from "../components/elements/preloader-content";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
- 
 
 const UbungsList = () => {
   const [practices, setPractices] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [count, setCount] = useState(0);
 
-  const handleClick = () => {
-    setCount(count + 1);
-  };
-  
   useEffect(() => {
-    fetch("https://ubai.dev/b2lernen.de/api/ubungs-api.php")
+    // Fetch practices from the new API endpoint
+    fetch("https://wh467262.ispot.cc/note-website-backend/api/practices/practices/")
       .then((response) => response.json())
       .then((data) => {
-        setPractices(data.practices);
+        setPractices(data); // Set the fetched data directly (no nested "practices" key)
         setIsLoading(false);
       })
       .catch((error) => console.error("Error fetching practices:", error));
@@ -55,16 +50,18 @@ const UbungsList = () => {
                     <div className="post-author display-flex align-items-center">
                       <div className="post-author-infos margin-left-half">
                         <span className="post-author-name display-block text-semibold">
-                          <Link to={`/ubung/${practice.slug}`}>
-                            {practice.name}
+                          {/* Use `id` instead of `slug` for routing */}
+                          <Link to={`/ubung/${practice.id}`}>
+                            {practice.title} {/* Updated field name from `name` to `title` */}
                           </Link>
                         </span>
                       </div>
                     </div>
 
                     <div className="b2-badge">
+                      {/* Use `id` instead of `slug` for routing */}
                       <Link
-                        to={`/ubung/${practice.slug}`}
+                        to={`/ubung/${practice.id}`}
                         className="badge color-yellow text-color-black p-10"
                       >
                         starten

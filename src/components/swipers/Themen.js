@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,43 +15,44 @@ import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
 import { Autoplay, Pagination, Navigation } from "swiper";
 
 const ThemenSwiper = () => {
-  const gradientThemes = [
-    "bg-gradient-red",
-    "bg-gradient-blue",
-    "bg-gradient-teal",
-    "bg-gradient-violet",
-  ];
-
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate("/search");
   };
 
-  const getRandomClass = (() => {
-    // Shuffle the gradientThemes array
-    const shuffledThemes = gradientThemes.sort(() => Math.random() - 0.5);
-
-    // Initialize a counter to keep track of used themes
-    let counter = 0;
-
-    return () => {
-      // If all themes have been used once, reset the counter and shuffle the array again
-      if (counter === gradientThemes.length) {
-        counter = 0;
-        shuffledThemes.sort(() => Math.random() - 0.5);
-      }
-
-      // Return the next unused theme and increment the counter
-      const theme = shuffledThemes[counter];
-      counter++;
-      return theme;
-    };
-  })();
+  const readableBackgrounds = [
+    "#FFCDD2", "#F8BBD0", "#E1BEE7", "#D1C4E9", "#C5CAE9",
+    "#BBDEFB", "#B3E5FC", "#B2EBF2", "#B2DFDB", "#C8E6C9",
+    "#DCEDC8", "#F0F4C3", "#FFF9C4", "#FFECB3", "#FFE0B2",
+    "#FFCCBC", "#D7CCC8", "#F5F5F5", "#CFD8DC", "#E0F7FA"
+  ];
 
   const [swiperRef, setSwiperRef] = useState(null);
   const [mainSubjects, setMainSubjects] = useState([]); // State to store main subjects
   const [isLoading, setIsLoading] = useState(true); // Loading state
+
+  const subjectColors = useMemo(() => {
+    const existingColors = JSON.parse(localStorage.getItem("subjectColors") || "{}");
+    const updatedColors = { ...existingColors };
+  
+    let usedColors = new Set(Object.values(existingColors));
+    const availableColors = readableBackgrounds.filter(c => !usedColors.has(c));
+  
+    mainSubjects.forEach((subject) => {
+      if (!updatedColors[subject.id]) {
+        const randomColor =
+          availableColors.length > 0
+            ? availableColors.splice(Math.floor(Math.random() * availableColors.length), 1)[0]
+            : readableBackgrounds[Math.floor(Math.random() * readableBackgrounds.length)];
+        updatedColors[subject.id] = randomColor;
+      }
+    });
+  
+    localStorage.setItem("subjectColors", JSON.stringify(updatedColors));
+    return updatedColors;
+  }, [mainSubjects]);
+  
 
   // Fetch main subjects from the API
   useEffect(() => {
@@ -83,7 +84,7 @@ const ThemenSwiper = () => {
             Themen
           </div>
           <div className="b2-opacity block-title no-margin b2-block-subtitle">
-            Alle B2 Themen
+            Alle FIAE Themen
           </div>
         </div>
         <div className="b2-badge">
@@ -126,66 +127,44 @@ const ThemenSwiper = () => {
             <Swiper
               onSwiper={setSwiperRef}
               slidesPerView={1}
-              centeredSlides={false}
               spaceBetween={10}
               navigation={{
                 nextEl: ".next_s",
                 prevEl: ".prev_s",
               }}
-              autoHeight={true}
-              autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-              }}
               breakpoints={{
                 320: {
-                  slidesPerView: "3.3",
-                },
-                400: {
-                  slidesPerView: "3.5",
-                },
-                768: {
-                  slidesPerView: "5.5",
-                },
-                1024: {
-                  slidesPerView: "6.5",
-                },
-                600: {
-                  slidesPerView: "3.2",
-                },
-                240: {
-                  slidesPerView: "2.3",
-                },
-                834: {
-                  slidesPerView: "4.5",
-                },
-                1920: {
-                  slidesPerView: "6.3",
-                },
-                360: {
-                  slidesPerView: "3.3",
+                  slidesPerView: 2.3,
                 },
                 576: {
-                  slidesPerView: "4.2",
+                  slidesPerView: 3.2,
+                },
+                768: {
+                  slidesPerView: 3.2,
+                },
+                1024: {
+                  slidesPerView: 3.4,
+                },
+                1920: {
+                  slidesPerView: 4.3,
                 },
               }}
               modules={[Navigation]}
-              className="swiper-container"
+              className="swiper-container cards--12"
             >
               {mainSubjects.map((subject) => (
                 <SwiperSlide key={subject.id}>
-                  <div className="">
-                    <div
-                      className={`margin-bottom`}
-                    >
+                  <div className="tttt" style={{ backgroundColor: subjectColors[subject.id] }}>
+                    <div className="margin-bottom">
                       <div className="display-flex align-items-center justify-content-space-left">
                         <div className="post-author-infos">
                           <span className="post-author-name display-block text-semibold">
                             <Link
-                              to={`/category/${subject.id}`} // Use subject slug for routing
-                              className={``}
+                              to={`/category/${subject.id}`}
+                              className=""
+                              style={{ color: "black" }} // ensure black text
                             >
-                              {subject.name} {/* Display the main subject name */}
+                              {subject.name}
                             </Link>
                           </span>
                         </div>

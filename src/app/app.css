@@ -50229,7 +50229,9 @@ a.link.icon-only.b2-notification {
     margin-bottom: 20px;
     box-shadow: unset;
 }
-
+.catlist  .cardw{
+    width: calc(100% - 60px); 
+}
 .cards--12 .card:nth-child(2n+2) {
     margin-right: 0px;
 }
@@ -50619,3 +50621,40 @@ body.theme-dark {
     font-size: 14px;
     line-height: 1.4;
 }
+
+
+
+  .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .swiper-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Ensures content adjusts naturally */
+    overflow: hidden;
+  }
+  
+  .swiper-wrapper {
+    display: flex;
+  }
+  
+  .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .tttt {
+    padding: 16px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding is included in width */
+  }

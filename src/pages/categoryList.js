@@ -4,15 +4,21 @@ import { BasicLayout } from "../layouts/basicLayout";
 import { Helmet } from "react-helmet";
 
 const CategoryList = () => {
-  const [categories, setCategories] = useState([]);
+  const [mainSubjects, setMainSubjects] = useState([]);
 
   useEffect(() => {
-    fetch("https://ubai.dev/b2lernen.de/api/api.php")
-      .then((response) => response.json())
+    fetch("https://wh467262.ispot.cc/note-website-backend/api/subjects/main-subjects/")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
-        // Get a list of unique categories
-        const uniqueCategories = [...new Set(data.articles.map(article => article.category))];
-        setCategories(uniqueCategories);
+        setMainSubjects(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching main subjects:", error);
       });
   }, []);
 
@@ -22,34 +28,33 @@ const CategoryList = () => {
         <title>{`Themen - B2 Lernen`}</title>
         <meta name="keywords" content="deutsch b2 lernen" />
       </Helmet>
-    <div>
-      <div className="b2-block">
-        <div className="b2-block-title display-flex align-items-center justify-content-space-between">
-          <div>
-            <div className="block-title-medium no-margin block-title text-semibold">
-              Themen Liste
-            </div>
-            <div className="b2-opacity block-title no-margin b2-block-subtitle">
-              Alle B2 Themen.
+      <div>
+        <div className="b2-block">
+          <div className="b2-block-title display-flex align-items-center justify-content-space-between">
+            <div>
+              <div className="block-title-medium no-margin block-title text-semibold">
+                Themen Liste
+              </div>
+              <div className="b2-opacity block-title no-margin b2-block-subtitle">
+                Alle B2 Themen.
+              </div>
             </div>
           </div>
-        </div>
-        <div className="b2-block-content">
-          <div className="cards cards--12">
-            {/* List categories as links */}
-            {categories.map((category, index) => (
-              <Link
-                to={`/category/${category}`}
-                className="cardw card--style-icon card--style-round-corners"
-                key={index}
-              >
-                <h4 className="card__title">{category}</h4>
-              </Link>
-            ))}
+          <div className="b2-block-content catlist">
+            <div className="cards cards--12">
+              {mainSubjects.map((subject) => (
+                <Link
+                  to={`/category/${subject.id}`}
+                  className="cardw card--style-icon card--style-round-corners"
+                  key={subject.id}
+                >
+                  <h4 className="card__title">{subject.name}</h4>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </BasicLayout>
   );
 };

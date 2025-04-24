@@ -1,0 +1,22 @@
+{
+    "HTTP (Hypertext Transfer Protocol)": "Das HTTP ist ein Protokoll zur Übertragung von Daten im World Wide Web.",
+    "FTP (File Transfer Protocol)": "Das FTP wird verwendet, um Dateien zwischen einem Client und einem Server auszutauschen.",
+    "TCP (Transmission Control Protocol)": "Das TCP ist ein verbindungsorientiertes Protokoll, das zuverlässige Datenübertragungen ermöglicht.",
+    "UDP (User Datagram Protocol)": "Das UDP ist ein verbindungsloses Protokoll, das schnellere, aber weniger zuverlässige Datenübertragungen bietet.",
+    "IP (Internet Protocol)": "Das IP ist für die Adressierung und Routing von Paketen in einem Netzwerk zuständig.",
+    "DNS (Domain Name System)": "Das DNS übersetzt Domainnamen in IP-Adressen, um die Kommunikation im Internet zu ermöglichen.",
+    "SMTP (Simple Mail Transfer Protocol)": "Das SMTP wird zur Übertragung von E-Mails zwischen Servern verwendet.",
+    "POP3 (Post Office Protocol Version 3)": "Das POP3 ermöglicht Clients den Abruf von E-Mails vom Server.",
+    "IMAP (Internet Message Access Protocol)": "Das IMAP ermöglicht den Zugriff auf E-Mails auf einem Server, ohne diese herunterzuladen.",
+    "SSH (Secure Shell)": "Das SSH dient zur sicheren Verbindung mit entfernten Systemen über ein Netzwerk.",
+    "TLS (Transport Layer Security)": "Das TLS stellt eine sichere Kommunikation im Internet durch Verschlüsselung sicher.",
+    "SSL (Secure Sockets Layer)": "Das SSL ist der Vorgänger von TLS und ermöglicht ebenfalls sichere Datenübertragungen.",
+    "DHCP (Dynamic Host Configuration Protocol)": "Das DHCP weist Geräten automatisch IP-Adressen und andere Netzwerkeinstellungen zu.",
+    "SNMP (Simple Network Management Protocol)": "Das SNMP wird zur Überwachung und Verwaltung von Netzwerkgeräten verwendet.",
+    "ICMP (Internet Control Message Protocol)": "Das ICMP wird zur Fehlermeldung und Diagnose in IP-Netzwerken genutzt.",
+    "ARP (Address Resolution Protocol)": "Das ARP übersetzt IP-Adressen in MAC-Adressen, um die Kommunikation im lokalen Netzwerk zu ermöglichen.",
+    "NTP (Network Time Protocol)": "Das NTP synchronisiert die Uhrzeiten von Geräten in einem Netzwerk.",
+    "SIP (Session Initiation Protocol)": "Das SIP wird zur Einrichtung und Steuerung von Kommunikationssitzungen, z.B. VoIP, verwendet.",
+    "RTP (Real-time Transport Protocol)": "Das RTP überträgt Audio- und Videodaten in Echtzeit.",
+    "WebSocket": "WebSocket ermöglicht eine bidirektionale Kommunikation zwischen Client und Server über ein TCP-Verbindung."
+  }

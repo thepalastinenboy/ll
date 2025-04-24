@@ -20,8 +20,8 @@ const Home = () => {
     <BasicLayout>
       <HeaderTop />
       <Helmet>
-        <title>{`Deutsch B2 Lernen: Alles, was Sie für den B2-Sprachkurs benötigen - B2 Lernen`}</title>
-        <meta name="keywords" content="deutsch b2 lernen" />
+        <title>{`Umschulung: Alles, was ich für die Umschulung benötigen - Note Website`}</title>
+        <meta name="keywords" content="Umschulung" />
       </Helmet>
       <ThemenSwiper />
       <div className="b2-block">
@@ -31,7 +31,7 @@ const Home = () => {
               Wortschatz
             </div>
             <div className="b2-opacity block-title no-margin b2-block-subtitle">
-              Alles was du im B2 merken musst.
+              Alles was ich merken muss.
             </div>
           </div>
           <div className="b2-badge">
@@ -46,10 +46,10 @@ const Home = () => {
         <div className="b2-block-content">
           <div className="cards cards--12">
             <Link
-              to="/wortschatz/verben"
+              to="/wortschatz/Netzwerk-[vertifung]"
               className="cardw card--style-icon card--style-round-corners"
             >
-              <h4 className="card__title">VERBEN</h4>
+              <h4 className="card__title">Netzwerk [vertifung]</h4>
             </Link>
             <Link
               to="/wortschatz/Beschwerde-Redemitteln"
@@ -58,10 +58,10 @@ const Home = () => {
               <h4 className="card__title">Beschwerde Redemitteln</h4>
             </Link>
             <Link
-              to="/wortschatz/verben-mit-praepositionen"
+              to="/wortschatz/Netzwerk-Protokolle"
               className="cardw card--style-icon card--style-round-corners"
             >
-              <h4 className="card__title">VERBEN MIT PRÄPOSITIONEN</h4>
+              <h4 className="card__title">Netzwerk Protokolle</h4>
             </Link>
             <Link
               to="/wortschatz/Thema-Wohnung"

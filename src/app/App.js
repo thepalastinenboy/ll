@@ -35,12 +35,12 @@ const ScrollToTop = () => {
 };
 
 const dataFiles = [
-  { filename: "verben.json", data: null },
-  { filename: "Verben mit Präpositionen.json", data: null },
+  { filename: "Netzwerk [vertifung].json", data: null },
+  { filename: "Netzwerk Protokolle.json", data: null },
   { filename: "Thema Wohnung.json", data: null },
   { filename: "Beschwerde-Redemitteln.json", data: null },
   // Add more data files here
-];
+]; 
 
 const replaceUmlauts = (str) => {
   return str
