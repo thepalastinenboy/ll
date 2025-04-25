@@ -52,10 +52,10 @@ const Home = () => {
               <h4 className="card__title">Netzwerk [vertifung]</h4>
             </Link>
             <Link
-              to="/wortschatz/Beschwerde-Redemitteln"
+              to="/wortschatz/sus"
               className="cardw card--style-icon card--style-round-corners"
             >
-              <h4 className="card__title">Beschwerde Redemitteln</h4>
+              <h4 className="card__title">Service und Support</h4>
             </Link>
             <Link
               to="/wortschatz/Netzwerk-Protokolle"
@@ -64,14 +64,15 @@ const Home = () => {
               <h4 className="card__title">Netzwerk Protokolle</h4>
             </Link>
             <Link
-              to="/wortschatz/Thema-Wohnung"
+              to="/wortschatz/IT-Grundlagen"
               className="cardw card--style-icon card--style-round-corners"
             >
-              <h4 className="card__title">Thema Wohnung</h4>
+              <h4 className="card__title">IT Grundlagen</h4>
             </Link>
           </div>
         </div>
       </div>
+      <UbungsListPopular />
 
       <div className="b2-block">
         <div className="b2-block-title display-flex align-items-center justify-content-space-between">
@@ -86,7 +87,7 @@ const Home = () => {
         </div>
         <div className="b2-block-content">
           <div className="blog-list-wrapper">
-            <div className="blog-list display-flex align-items-start">
+            {/* <div className="blog-list display-flex align-items-start">
               <div className="blog-list-infos">
                 <div className="b2-badge">
                   <Link to="article/10" className="badge cat-schreiben">
@@ -140,12 +141,24 @@ const Home = () => {
                   <Link to="article/1">Zweiteilige Konnektoren</Link>
                 </h2>
               </div>
-            </div>
+              
+            </div> */}
+             <div id="preloader-container">
+  <div id="preloader-content">
+    <div id="preloader-title" className="preloader-shimmer" />
+    <div id="preloader-desc">
+      <div className="preloader-line preloader-shimmer" />
+      <div className="preloader-line preloader-shimmer" />
+      <div className="preloader-line preloader-shimmer" />
+      <div className="preloader-line preloader-shimmer" />
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>
 
-      <UbungsListPopular />
+      
     </BasicLayout>
   );
 };

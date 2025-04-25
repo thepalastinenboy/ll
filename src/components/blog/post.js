@@ -11,6 +11,34 @@ import PreloaderContent from "../elements/preloader-content";
 import { FacebookProvider, Comments } from "react-facebook";
 import { Helmet } from "react-helmet";
 
+function enhanceFramework7Tables(htmlContent) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlContent, 'text/html');
+
+  doc.querySelectorAll('table').forEach((table) => {
+    // Wrap table in <div class="data-table"> if not already
+    if (!table.parentElement.classList.contains('data-table')) {
+      const wrapper = doc.createElement('div');
+      wrapper.className = 'data-table';
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    }
+
+    // Add Framework7 classes to table headers and cells
+    const headers = table.querySelectorAll('thead th');
+    headers.forEach((th, i) => {
+      th.classList.add(i === 0 ? 'label-cell' : 'numeric-cell');
+    });
+
+    const cells = table.querySelectorAll('tbody td');
+    cells.forEach((td, i) => {
+      td.classList.add(i % 2 === 0 ? 'label-cell' : 'numeric-cell');
+    });
+  });
+
+  return doc.body.innerHTML;
+}
+
 const Article = () => {
   const { slug } = useParams();
 
@@ -152,9 +180,11 @@ const Article = () => {
                   </Helmet>
                   <h2>{subSubject.name}</h2>
                   <div
-                    className="single-post-content margin-top"
-                    dangerouslySetInnerHTML={{ __html: subSubject.content }}
-                  ></div>
+  className="single-post-content margin-top"
+  dangerouslySetInnerHTML={{
+    __html: enhanceFramework7Tables(subSubject.content)
+  }}
+></div>
 
                   {/* Add the Facebook comments component */}
                   <div className="no-margin">

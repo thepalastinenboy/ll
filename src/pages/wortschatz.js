@@ -132,8 +132,8 @@ export const Wortschatz = ({ data, storageKey }) => {
 
               <div className="title title-navbar-transparent">{storageKey}</div>
               <Helmet>
-                <title>{`${storageKey} - B2 Lernen`}</title>
-                <meta name="keywords" content={`Wortschatz, ${storageKey},deutsch ,b2 lernen`} />
+                <title>{`${storageKey} - FIAE`}</title>
+                <meta name="keywords" content={`Wortschatz, ${storageKey},deutsch ,FIAE`} />
               </Helmet>
               <div className="right save-b">
                 <div className="link">

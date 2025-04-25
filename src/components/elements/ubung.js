@@ -163,8 +163,8 @@ const GermanLanguagePractice = () => {
   return (
     <BasicLayout headerTop>
       <Helmet>
-        <title>{`${practiceData.title} Übung - B2 Lernen`}</title>
-        <meta name="keywords" content={`${practiceData.title}, Übung, Deutsch, B2 Lernen`} />
+        <title>{`${practiceData.title} Übung - FIAE`}</title>
+        <meta name="keywords" content={`${practiceData.title}, Übung, Deutsch, FIAE`} />
       </Helmet>
       <div className="navbar navbar-transparent">
         <div className="navbar-bg" />

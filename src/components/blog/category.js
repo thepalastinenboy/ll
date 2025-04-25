@@ -80,7 +80,7 @@ const KnowledgeBase = () => {
                         {subject.name}
                       </Link>
                     </h2>
-                    <p className="description">{subject.content?.slice(0, 150)}...</p>
+                    {/* <p className="description">{subject.content?.slice(0, 150)}...</p> */}
                   </div>
                 </div>
               ))}

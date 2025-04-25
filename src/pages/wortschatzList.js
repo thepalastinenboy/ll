@@ -31,8 +31,8 @@ const WortschatzList = ({ dataFiles }) => {
   return (
     <BasicLayout>
       <Helmet>
-                <title>{`Wortschatz Liste - B2 Lernen`}</title>
-                <meta name="keywords" content={`Wortschatz,deutsch ,b2 lernen`} />
+                <title>{`Wortschatz Liste - FIAE`}</title>
+                <meta name="keywords" content={`Wortschatz,deutsch ,FIAE`} />
               </Helmet>
       <HeaderTop />
       <div className="b2-block">
@@ -42,7 +42,7 @@ const WortschatzList = ({ dataFiles }) => {
               Wortschatz
             </div>
             <div className="b2-opacity block-title no-margin b2-block-subtitle">
-              Alles, was du im B2 merken musst.
+              Alles, was ich merken muss.
             </div>
           </div>
         </div>

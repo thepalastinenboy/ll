@@ -6,45 +6,48 @@ import { Helmet } from "react-helmet";
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [visibleArticles, setVisibleArticles] = useState(5);
-  const [articleData, setArticleData] = useState({ articles: [] });
+  const [visibleSubSubjects, setVisibleSubSubjects] = useState(5); // Visible sub-subjects
+  const [subSubjectData, setSubSubjectData] = useState({ subSubjects: [] }); // Sub-subjects data
   const searchInputRef = useRef();
 
+  // Fetch sub-subjects data from the API
   useEffect(() => {
-    const fetchArticleData = async () => {
+    const fetchSubSubjectData = async () => {
       try {
-        const response = await fetch("https://ubai.dev/b2lernen.de/api/api.php");
+        const response = await fetch("https://wh467262.ispot.cc/note-website-backend/api/subjects/sub-subjects/");
         const jsonData = await response.json();
-        setArticleData(jsonData);
+        setSubSubjectData({ subSubjects: jsonData }); // Update state with fetched data
       } catch (error) {
-        console.error("Error fetching article data:", error);
+        console.error("Error fetching sub-subject data:", error);
       }
     };
 
-    fetchArticleData();
-    searchInputRef.current.focus();
+    fetchSubSubjectData();
+    searchInputRef.current.focus(); // Focus on the search input
   }, []);
 
-  const filteredArticles = articleData.articles.filter(
-    (article) =>
-      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.content.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter sub-subjects based on the search term
+  const filteredSubSubjects = subSubjectData.subSubjects.filter(
+    (subSubject) =>
+      subSubject.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      subSubject.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Handle search input changes
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  // Load more sub-subjects
   const handleLoadMore = () => {
-    setVisibleArticles((prevVisibleArticles) => prevVisibleArticles + 5);
+    setVisibleSubSubjects((prevVisibleSubSubjects) => prevVisibleSubSubjects + 5);
   };
-
 
   return (
     <BasicLayout>
       <Helmet>
-        <title>{`Suchen - B2 Lernen`}</title>
-        <meta name="keywords" content="deutsch b2 lernen" />
+        <title>{`Suchen - FIAE`}</title>
+        <meta name="keywords" content="deutsch FIAE" />
       </Helmet>
       <div className="navbar navbar-transparent">
         <div className="navbar-bg" />
@@ -85,22 +88,31 @@ const Search = () => {
       <div className="b2-block no-border">
         <div className="b2-block-content">
           <div className="blog-list-wrapper">
-            {filteredArticles.slice(0, visibleArticles).map((article) => (
+            {/* Render filtered sub-subjects */}
+            {filteredSubSubjects.slice(0, visibleSubSubjects).map((subSubject) => (
               <div
-                key={article.id}
+                key={subSubject.id}
                 className="blog-list display-flex align-items-start flex-direction-row-reverse"
               >
                 <div className="blog-list-infos margin-right margin-top">
                   <h2 className="margin-bottom-half no-margin-top">
-                    <Link to={`/article/${article.id}`}>{article.title}</Link>
+                    {/* Link to the sub-subject detail page */}
+                    <Link to={`/sub-subject/${subSubject.id}`}>
+                      {subSubject.name}
+                    </Link>
                   </h2>
+                  
                 </div>
               </div>
             ))}
           </div>
-          {visibleArticles < filteredArticles.length && (
+          {/* Load more button */}
+          {visibleSubSubjects < filteredSubSubjects.length && (
             <div className="b2-badge text-align-center">
-              <div className="badge text-color-red text-color-white" onClick={handleLoadMore}>
+              <div
+                className="badge text-color-red text-color-white"
+                onClick={handleLoadMore}
+              >
                 Mehr laden
               </div>
             </div>

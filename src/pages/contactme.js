@@ -57,8 +57,8 @@ const ContactPage = () => {
   return (
     <BasicLayout>
       <Helmet>
-        <title>{`Kontakt - B2 Lernen`}</title>
-        <meta name="keywords" content="deutsch b2 lernen" />
+        <title>{`Kontakt - FIAE`}</title>
+        <meta name="keywords" content="deutsch FIAE" />
       </Helmet>
       <HeaderTop />
       <div className="b2-block">

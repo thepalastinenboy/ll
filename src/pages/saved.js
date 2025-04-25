@@ -52,8 +52,8 @@ const SavedContent = () => {
   return (
     <BasicLayout>
       <Helmet>
-        <title>{`Gespeicherte Liste - B2 Lernen`}</title>
-        <meta name="keywords" content="deutsch b2 lernen" />
+        <title>{`Gespeicherte Liste - FIAE`}</title>
+        <meta name="keywords" content="deutsch FIAE" />
       </Helmet>
       <div className="navbar navbar-transparent">
         <div className="navbar-bg" />

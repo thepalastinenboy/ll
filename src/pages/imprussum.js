@@ -21,22 +21,7 @@ const Imprussum = () => {
             <div className="margin-top">
               <div className="single-post-content margin-top">
                 <>
-                  <p>
-                    <strong>Angaben gemäß § 5 TMG:</strong>
-                  </p>
-                  <p>
-                    Ubai <br />
-                    Web Entwickler
-                  </p>
-                  <p>12643 Berlin Deutschland</p>
-                  <p>
-                    <strong>Kontakt:</strong>
-                  </p>
-                  <p>
-                    E-Mail:{" "}
-                    <a href="mailto:kontakt@b2lernen.de">kontakt@b2lernen.de</a>
-                  </p>
-                  <p>&nbsp;</p>
+                
                   <p>
                     <strong>Hinweis:</strong>
                   </p>

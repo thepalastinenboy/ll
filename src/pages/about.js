@@ -7,8 +7,8 @@ const About = () => {
   return (
     <BasicLayout>
       <Helmet>
-        <title>{`Über mich - B2 Lernen`}</title>
-        <meta name="keywords" content="deutsch b2 lernen" />
+        <title>{`Über mich - FIAE`}</title>
+        <meta name="keywords" content="deutsch FIAE" />
       </Helmet>
       <HeaderTop />
       <div className="b2-block">

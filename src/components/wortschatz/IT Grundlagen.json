@@ -1,0 +1,17 @@
+{
+    "Bits & Bytes": "Bits und Bytes sind die grundlegenden Informationseinheiten der digitalen Welt. Ein Bit kann nur den Wert 0 oder 1 annehmen, während 8 Bits ein Byte bilden.",
+    "Binärsystem": "Das Binärsystem ist ein Zahlensystem mit der Basis 2, das nur zwei Ziffern verwendet: 0 und 1. Es wird in der Informatik verwendet, da Computer auf dieser Basis arbeiten.",
+    "Hexadezimalsystem": "Das Hexadezimalsystem ist ein Zahlensystem mit der Basis 16. Es verwendet die Ziffern 0-9 und die Buchstaben A-F, um Werte darzustellen und wird häufig zur Darstellung von Binärzahlen in kompakter Form verwendet.",
+    "Oktalsystem": "Das Oktalsystem ist ein Zahlensystem mit der Basis 8 und verwendet die Ziffern 0-7. Früher war es in der Computertechnik gebräuchlich, um Binärzahlen zu vereinfachen.",
+    "Boolesche Logik": "Die Boolesche Logik arbeitet mit zwei Werten: wahr (1) und falsch (0). Sie wird für Entscheidungsprozesse in der Informatik genutzt und ist Grundlage vieler Programmier- und Schaltlogiken.",
+    "Logikgatter": "Logikgatter sind grundlegende Bauelemente in digitalen Schaltungen. Sie führen logische Operationen durch, wie AND, OR und NOT, und bilden die Basis für alle digitalen Systeme.",
+    "Strom": "Strom bezeichnet die Bewegung von Elektronen in einem Leiter. Er wird in Ampere (A) gemessen und ist die Grundlage für elektrische Energieversorgung.",
+    "Stromstärke": "Die Stromstärke gibt an, wie viele Elektronen pro Sekunde durch einen Leiter fließen. Sie wird in Ampere (A) gemessen.",
+    "Spannung": "Spannung ist die treibende Kraft, die den Strom durch einen Leiter bewegt. Sie wird in Volt (V) gemessen und ist notwendig, um elektrische Geräte zu betreiben.",
+    "Widerstand & Ohmsches Gesetz": "Der Widerstand beschreibt die Fähigkeit eines Materials, den Stromfluss zu behindern. Das Ohmsche Gesetz beschreibt die Beziehung zwischen Spannung, Stromstärke und Widerstand.",
+    "Stromversorgung": "Stromversorgungen liefern die notwendige Energie, um elektrische Geräte zu betreiben. Sie können aus verschiedenen Quellen wie Netzteilen oder Batterien bestehen.",
+    "USV-Management": "USV steht für Unterbrechungsfreie Stromversorgung. Sie schützt Geräte vor Stromausfällen und sorgt dafür, dass diese bei Ausfällen weiter betrieben werden können.",
+    "Auswahl einer USV": "Bei der Auswahl einer USV sollte auf die benötigte Leistung, die Betriebsdauer im Falle eines Ausfalls und die Art der angeschlossenen Geräte geachtet werden.",
+    "Backup-Strategien": "Backup-Strategien umfassen Methoden wie regelmäßige Sicherungen von Daten auf externen Speichergeräten oder in der Cloud, um Datenverluste zu vermeiden.",
+    "RAID-Systeme": "RAID-Systeme (Redundant Array of Independent Disks) kombinieren mehrere Festplatten, um entweder die Datensicherheit oder die Leistung zu erhöhen. Beispiele sind RAID 0, RAID 1 und RAID 5."
+}

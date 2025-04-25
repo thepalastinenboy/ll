@@ -25,8 +25,8 @@ const CategoryList = () => {
   return (
     <BasicLayout headerTop>
       <Helmet>
-        <title>{`Themen - B2 Lernen`}</title>
-        <meta name="keywords" content="deutsch b2 lernen" />
+        <title>{`Themen - FIAE`}</title>
+        <meta name="keywords" content="deutsch FIAE" />
       </Helmet>
       <div>
         <div className="b2-block">

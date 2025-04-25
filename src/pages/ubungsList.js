@@ -23,8 +23,8 @@ const UbungsList = () => {
   return (
     <BasicLayout>
       <Helmet>
-        <title>{`Übungen Liste - B2 Lernen`}</title>
-        <meta name="keywords" content="deutsch b2 lernen" />
+        <title>{`Übungen Liste - FIAE`}</title>
+        <meta name="keywords" content="deutsch FIAE" />
       </Helmet>
       <HeaderTop />
       <div className="b2-block no-border">

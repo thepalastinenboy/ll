@@ -37,9 +37,8 @@ const ScrollToTop = () => {
 const dataFiles = [
   { filename: "Netzwerk [vertifung].json", data: null },
   { filename: "Netzwerk Protokolle.json", data: null },
-  { filename: "Thema Wohnung.json", data: null },
-  { filename: "Beschwerde-Redemitteln.json", data: null },
-  // Add more data files here
+  { filename: "IT Grundlagen.json", data: null },
+  { filename: "sus.json", data: null },
 ]; 
 
 const replaceUmlauts = (str) => {

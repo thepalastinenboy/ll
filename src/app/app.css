@@ -50658,3 +50658,19 @@ body.theme-dark {
     width: 100%;
     box-sizing: border-box; /* Ensures padding is included in width */
   }
+
+  .single-post-content hr{
+    border: none;
+    text-align: center;
+    margin-top: 1em !important;
+    margin-bottom: 3em !important;
+    font-size: 28px;
+    display: block;  
+    padding: 0;
+  }
+
+.single-post-content  hr:before {
+    content: ". . .";
+    word-spacing: 16px;
+    font-size: 29px;
+}
